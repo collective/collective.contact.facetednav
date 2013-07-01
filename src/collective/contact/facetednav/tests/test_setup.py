@@ -24,7 +24,7 @@ class TestInstall(IntegrationTestCase):
 
     # browserlayer.xml
     def test_browserlayer(self):
-        """Test that ICollective.contactFacetednavLayer is registered."""
-        from collective.contact.facetednav.interfaces import ICollective.contactFacetednavLayer
+        """Test that ICollectiveContactFacetednavLayer is registered."""
+        from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
         from plone.browserlayer import utils
-        self.failUnless(ICollective.contactFacetednavLayer in utils.registered_layers())
+        self.failUnless(ICollectiveContactFacetednavLayer in utils.registered_layers())

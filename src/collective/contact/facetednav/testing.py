@@ -17,7 +17,7 @@ import unittest2 as unittest
 import collective.contact.facetednav
 
 
-class Collective.contactFacetednavLayer(PloneSandboxLayer):
+class CollectiveContactFacetednavLayer(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
@@ -48,7 +48,7 @@ class Collective.contactFacetednavLayer(PloneSandboxLayer):
         z2.uninstallProduct(app, 'collective.contact.facetednav')
 
 
-FIXTURE = Collective.contactFacetednavLayer(
+FIXTURE = CollectiveContactFacetednavLayer(
     name="FIXTURE"
     )
 

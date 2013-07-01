@@ -2,6 +2,6 @@
 <layers>
   <layer
     name="collective.contact.facetednav"
-    interface="collective.contact.facetednav.interfaces.ICollective.contactFacetednavLayer"
+    interface="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
   />
 </layers>

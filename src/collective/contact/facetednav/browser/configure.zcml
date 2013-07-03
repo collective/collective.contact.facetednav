@@ -10,4 +10,26 @@
       directory="static"
       />
 
+  <browser:defaultView
+      for="collective.contact.core.content.directory.IDirectory"
+      name="facetednavigation_view"
+      layer="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
+      />
+
+  <browser:page
+    name="faceted-preview-item"
+    for="collective.contact.core.content.person.IPerson"
+    template="preview-person.pt"
+    layer="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    name="faceted-preview-item"
+    for="collective.contact.core.content.organization.IOrganization"
+    template="preview-organization.pt"
+    layer="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
+    permission="zope2.View"
+    />
+
 </configure>

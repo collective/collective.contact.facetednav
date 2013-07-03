@@ -41,6 +41,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        'collective.contact.core',
         'eea.facetednavigation',
         'five.grok',
         'plone.api',

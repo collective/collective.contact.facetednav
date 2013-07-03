@@ -1,1 +1,2 @@
 - Cédric Messiant, cedricmessiant@ecreall.com
+- Thomas Desvenain, thomas.desvenain@gmail.com

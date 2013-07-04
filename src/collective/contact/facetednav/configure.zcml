@@ -14,8 +14,9 @@
     <include package="five.grok" />
     <include package="plone.api" />
     <include package="collective.contact.core" />
+    <exclude package="eea.facetednavigation" />
     <include package="eea.facetednavigation" file="meta.zcml" />
-    <include package="eea.facetednavigation" />
+    <include package="eea.facetednavigation" file="minimal.zcml" />
 
     <include package=".browser" />
     <include package=".content" />

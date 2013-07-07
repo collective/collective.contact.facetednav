@@ -25,4 +25,8 @@
      class="contact-email"
      tal:attributes="href string:mailto:${context/email}"
      tal:content="context/email"></a>
+  <span tal:repeat="held_position context/get_held_positions">
+    <a tal:attributes="href held_position/absolute_url"
+       tal:content="held_position/Title">Developer (Ecréall)</a>
+  </span>
 </div>

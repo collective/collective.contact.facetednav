@@ -3,7 +3,7 @@
     xmlns:five="http://namespaces.zope.org/five"
     xmlns:grok="http://namespaces.zope.org/grok"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.zope.org/plone"
+	xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.facetednav">
 
@@ -13,6 +13,7 @@
 
     <include package="five.grok" />
     <include package="plone.api" />
+    <include package="plone.behavior" file="meta.zcml" />
     <include package="collective.contact.core" />
     <exclude package="eea.facetednavigation" />
     <include package="eea.facetednavigation" file="meta.zcml" />
@@ -38,9 +39,15 @@
         handler=".setuphandlers.post_install">
     </genericsetup:importStep>
 
-  <utility
-    component=".vocabularies.ContactPortalTypesVocabularyFactory"
-    name="collective.contact.facetednav.vocabularies.ContactPortalTypes"
-    />
+    <utility
+      component=".vocabularies.ContactPortalTypesVocabularyFactory"
+      name="collective.contact.facetednav.vocabularies.ContactPortalTypes"
+      />
+
+    <plone:behavior
+        title="IPossibleFacetedNavigable"
+        description="We can activate faceted navigation on this content."
+        provides="eea.facetednavigation.subtypes.interfaces.IPossibleFacetedNavigable"
+        />
 
 </configure>

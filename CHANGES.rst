@@ -6,5 +6,5 @@ Changelog
 ----------------
 
 - Initial release.
-  [cedricmessiant]
+  [thomasdesvenain]
 

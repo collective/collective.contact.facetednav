@@ -4,11 +4,11 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.contact.facetednav">
 
-    <!-- Publish static files -->
-    <browser:resourceDirectory
-      name="collective.contact.facetednav"
-      directory="static"
-      />
+  <!-- Publish static files -->
+  <browser:resourceDirectory
+    name="collective.contact.facetednav"
+    directory="static"
+    />
 
   <browser:defaultView
       for="collective.contact.core.content.directory.IDirectory"

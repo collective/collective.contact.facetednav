@@ -1,22 +1,36 @@
 <div class="organization-entry"
   tal:define="portal_type context/portal_type;
               useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
-              useView python:portal_type in useViewTypes;">
+              useView python:portal_type in useViewTypes;
+              macros nocall:context/@@contact-macros | nothing;
+              organization_macro macros/organization | nothing;
+              showOrganizationMacro python:organization_macro;">
+
   <a tal:define="
       title context/pretty_title_or_id|string:;
       url context/absolute_url|string:#;
-      has_photo context/photo|nothing;"
+      has_logo context/logo|nothing;"
      tal:attributes="href url;
                      title title">
+    <span class="organization-logo">
+      <img tal:condition="has_logo"
+           tal:replace="structure context/@@images/logo/tile" />
+    </span>
     <span class="organization-title" tal:content="title"></span>
-    <span class="organization-company" tal:content="string:"></span>
   </a>
-  <span class="organization-phone"
-     tal:condition="context/phone"
-     tal:attributes="href string:tel:${context/phone}"
-     tal:content="context/phone">317-456-2564</span>
-  <a tal:condition="context/email"
-     class="organization-email"
-     tal:attributes="href string:mailto:${context/email}"
-     tal:content="context/email"></a>
+  <div class="contact-info">
+    <span class="organization-phone"
+       tal:condition="context/phone"
+       tal:attributes="href string:tel:${context/phone}"
+       tal:content="context/phone">317-456-2564</span>
+    <span class="organization-email"
+          tal:condition="context/email">
+      <a tal:attributes="href string:mailto:${context/email}"
+         tal:content="context/email"></a></span>
+
+    <tal:macro condition="showOrganizationMacro">
+      <div metal:use-macro="organization_macro"/>
+    </tal:macro>
+
+  </div>
 </div>

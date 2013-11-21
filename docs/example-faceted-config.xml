@@ -43,14 +43,14 @@
   </criterion>
   <criterion name="c3">
    <property name="widget">alphabetic</property>
-   <property name="title">Recherche par titre</property>
+   <property name="title">Recherche alphabétique</property>
    <property name="position">top</property>
    <property name="section">default</property>
    <property name="hidden">0</property>
    <property name="count">0</property>
    <property name="sortcountable">0</property>
    <property name="hidezerocount">0</property>
-   <property name="index">Title</property>
+   <property name="index">sortable_title</property>
    <property name="default"></property>
   </criterion>
  </criteria>

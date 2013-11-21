@@ -5,7 +5,17 @@ Changelog
 0.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Add alphabetic criterion to faceted config example.
+  [cedricmessiant]
+
+- Add some style to faceted navigation results.
+  [cedricmessiant]
+
+- Add macros to customize faceted navigation results.
+  [cedricmessiant]
+
+- Fix bug with held position phone and email in preview-* templates.
+  [cedricmessiant]
 
 
 0.10 (2013-11-04)
@@ -19,4 +29,3 @@ Changelog
 
 - Initial release.
   [thomasdesvenain]
-

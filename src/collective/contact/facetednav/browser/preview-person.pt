@@ -23,14 +23,17 @@
     <span class="contact-title" tal:content="title"></span>
   </a>
 
-  <div class="contact-info">
+  <div class="contact-info"
+       tal:define="personHasPhone python:getattr(context.aq_base, 'phone', False) is not False;
+                   personHasEmail python:getattr(context.aq_base, 'email', False) is not False;">
     <span class="contact-phone"
-          tal:condition="context/phone|nothing"
+          tal:condition="python:personHasPhone and context.phone"
           tal:attributes="href string:tel:${context/phone}"
           tal:content="context/phone">317-456-2564
     </span>
 
-    <span class="contact-email" tal:condition="context/email|nothing">
+    <span class="contact-email"
+          tal:condition="python:personHasEmail and context.email">
        <a tal:attributes="href string:mailto:${context/email}"
           tal:content="context/email"></a>
     </span>
@@ -44,6 +47,15 @@
 
       <a tal:attributes="href held_position/absolute_url"
          tal:content="held_position/Title">Developer (Ecréall)</a>
+
+    <span class="contact-phone"
+         tal:condition="python:not personHasPhone and held_position.phone"
+         tal:attributes="href string:tel:${held_position/phone}"
+         tal:content="held_position/phone">317-456-2564</span>
+    <a class="contact-email"
+       tal:condition="python:not personHasEmail and held_position.email"
+       tal:attributes="href string:mailto:${held_position/email}"
+       tal:content="held_position/email"></a>
 
       <tal:macro condition="showHeldPositionMacro">
         <div metal:use-macro="held_position_macro"/>

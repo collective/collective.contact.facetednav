@@ -5,6 +5,11 @@ Changelog
 0.11 (unreleased)
 -----------------
 
+- In faceted search results for person, display held positions phones and emails
+  if the person doesn't have phone and email (if person content type doesn't have
+  IContactDetails behavior, held_position should).
+  [cedricmessiant]
+
 - Add alphabetic criterion to faceted config example.
   [cedricmessiant]
 

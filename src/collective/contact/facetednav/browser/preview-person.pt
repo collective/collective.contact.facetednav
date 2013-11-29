@@ -16,7 +16,7 @@
                      title title">
     <span class="contact-photo">
       <img tal:condition="has_photo"
-           tal:replace="structure context/@@images/photo/tile" />
+           tal:replace="structure context/@@images/photo/tile|string:X" />
       <img tal:condition="not:has_photo" style="border: none" src="defaultUser.png"
            height="64" />
     </span>

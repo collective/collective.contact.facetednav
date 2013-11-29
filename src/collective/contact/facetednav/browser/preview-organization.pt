@@ -14,7 +14,7 @@
                      title title">
     <span class="organization-logo">
       <img tal:condition="has_logo"
-           tal:replace="structure context/@@images/logo/tile" />
+           tal:replace="structure context/@@images/logo/tile|string:X" />
     </span>
     <span class="organization-title" tal:content="title"></span>
   </a>

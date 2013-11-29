@@ -5,6 +5,9 @@ Changelog
 0.11 (unreleased)
 -----------------
 
+- Manage case users have uploaded non-image formats for logo or photo.
+  [thomasdesvenain]
+
 - In faceted search results for person, display held positions phones and emails
   if the person doesn't have phone and email (if person content type doesn't have
   IContactDetails behavior, held_position should).

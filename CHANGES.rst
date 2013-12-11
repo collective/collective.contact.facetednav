@@ -5,6 +5,9 @@ Changelog
 0.11 (unreleased)
 -----------------
 
+- Do not declare navigable behavior - depends on eea.facetednavigation >= 5.8.
+  [thomasdesvenain]
+
 - Manage case users have uploaded non-image formats for logo or photo.
   [thomasdesvenain]
 

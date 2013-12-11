@@ -45,10 +45,4 @@
       name="collective.contact.facetednav.vocabularies.ContactPortalTypes"
       />
 
-    <plone:behavior
-        title="IPossibleFacetedNavigable"
-        description="We can activate faceted navigation on this content."
-        provides="eea.facetednavigation.subtypes.interfaces.IPossibleFacetedNavigable"
-        />
-
 </configure>

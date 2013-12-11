@@ -43,7 +43,7 @@ setup(
     install_requires=[
         'collective.contact.core > 1.0',
         'ecreall.helpers.upgrade',
-        'eea.facetednavigation',
+        'eea.facetednavigation >= 5.8',
         'five.grok',
         'plone.api',
         'setuptools',

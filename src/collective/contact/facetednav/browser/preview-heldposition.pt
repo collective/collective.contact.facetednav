@@ -7,12 +7,12 @@
               useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
               useView python:portal_type in useViewTypes;
               macros nocall:context/@@contact-macros | nothing;
-              person_macro macros/person | nothing;
-              showPersonMacro python:person_macro;
               held_position_macro macros/held_position | nothing;
-              showHeldPositionMacro python:held_position_macro">
+              showHeldPositionMacro python:held_position_macro;
+              person context/get_person;">
+
   <a tal:define="
-      title context/pretty_title_or_id|string:;
+      title context/get_full_title|string:;
       url context/absolute_url|string:#;
       has_photo context/photo|nothing;"
      tal:attributes="href url;
@@ -27,46 +27,28 @@
   </a>
 
   <div class="contact-info"
-       tal:define="personHasPhone python:getattr(context.aq_base, 'phone', False) is not False;
-                   personHasEmail python:getattr(context.aq_base, 'email', False) is not False;">
+       tal:define="heldPositionHasPhone python:getattr(context.aq_base, 'phone', False) is not False;
+                   heldPositionHasEmail python:getattr(context.aq_base, 'email', False) is not False;">
     <span class="contact-phone"
-          tal:condition="python:personHasPhone and context.phone"
+          tal:condition="python:heldPositionHasPhone and context.phone"
           tal:attributes="href string:tel:${context/phone}"
           tal:content="context/phone">317-456-2564
     </span>
 
     <span class="contact-email"
-          tal:condition="python:personHasEmail and context.email">
+          tal:condition="python:heldPositionHasEmail and context.email">
        <a tal:attributes="href string:mailto:${context/email}"
           tal:content="context/email"></a>
     </span>
 
-    <tal:macro condition="showPersonMacro">
-      <div metal:use-macro="person_macro"></div>
-    </tal:macro>
-
-    <span class="held_position"
-          tal:repeat="held_position context/get_held_positions">
-
-      <a tal:attributes="href held_position/absolute_url"
-         tal:content="held_position/Title">Developer (Ecréall)</a>
-
-    <span tal:condition="python:not personHasPhone and held_position.phone">&mdash;</span>
     <span class="contact-phone"
-         tal:condition="python:not personHasPhone and held_position.phone"
+         tal:condition="python:not heldPositionHasPhone and person.phone"
          tal:attributes="href string:tel:${held_position/phone}"
          tal:content="held_position/phone">317-456-2564</span>
-
-    <span tal:condition="python:not personHasEmail and held_position.email">&mdash;</span>
     <a class="contact-email"
-       tal:condition="python:not personHasEmail and held_position.email"
+       tal:condition="python:not heldPositionHasEmail and person.email"
        tal:attributes="href string:mailto:${held_position/email}"
        tal:content="held_position/email"></a>
-
-      <tal:macro condition="showHeldPositionMacro">
-        <div metal:use-macro="held_position_macro"></div>
-      </tal:macro>
-    </span>
 
   </div>
 </div>

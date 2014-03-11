@@ -1,4 +1,8 @@
 <div class="organization-entry"
+  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  i18n:domain="collective.contact.facetednav"
   tal:define="portal_type context/portal_type;
               useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
               useView python:portal_type in useViewTypes;
@@ -29,7 +33,7 @@
          tal:content="context/email"></a></span>
 
     <tal:macro condition="showOrganizationMacro">
-      <div metal:use-macro="organization_macro"/>
+      <div metal:use-macro="organization_macro"></div>
     </tal:macro>
 
   </div>

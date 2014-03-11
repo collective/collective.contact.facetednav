@@ -32,4 +32,12 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    name="faceted-preview-item"
+    for="collective.contact.core.content.held_position.IHeldPosition"
+    template="preview-heldposition.pt"
+    layer="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
+    permission="zope2.View"
+    />
+
 </configure>

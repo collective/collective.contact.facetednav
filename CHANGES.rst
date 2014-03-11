@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-0.11 (unreleased)
------------------
+1.0 (2014-03-11)
+----------------
 
 - Do not declare navigable behavior - depends on eea.facetednavigation >= 5.8.
   [thomasdesvenain]

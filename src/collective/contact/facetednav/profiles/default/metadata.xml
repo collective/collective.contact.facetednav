@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>2</version>
+  <version>3</version>
   <dependencies>
     <dependency>profile-collective.contact.core:default</dependency>
     <dependency>profile-eea.facetednavigation:default</dependency>
+    <dependency>profile-collective.js.backbone:default</dependency>
   </dependencies>
 </metadata>

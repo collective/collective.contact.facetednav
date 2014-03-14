@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
+import os
 
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -14,7 +15,10 @@ from plone.testing import z2
 
 import unittest2 as unittest
 
+from zope.interface import alsoProvides
+from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 import collective.contact.facetednav
+import collective.contact.core
 
 
 class CollectiveContactFacetednavLayer(PloneSandboxLayer):
@@ -27,11 +31,20 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
         self.loadZCML(package=collective.contact.facetednav,
                       name='testing.zcml')
         z2.installProduct(app, 'collective.contact.facetednav')
+        self.loadZCML(package=collective.contact.core,
+                      name='testing.zcml')
+        z2.installProduct(app, 'collective.contact.core')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
         # Install into Plone site using portal_setup
+        applyProfile(portal, 'collective.contact.core:testing')
+        # insert some test data
+        applyProfile(portal, 'collective.contact.core:test_data')
         applyProfile(portal, 'collective.contact.facetednav:default')
+        alsoProvides(portal.mydirectory, IFacetedNavigable)
+        portal.mydirectory.unrestrictedTraverse('@@faceted_exportimport')._import_xml(
+            import_file=open(os.path.dirname(__file__) + '/tests/contacts-faceted.xml'))
 
         # Login and create some test content
         setRoles(portal, TEST_USER_ID, ['Manager'])

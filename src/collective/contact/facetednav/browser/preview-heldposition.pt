@@ -1,8 +1,8 @@
-<div class="contact-entry"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+<div xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   i18n:domain="collective.contact.facetednav"
+  tal:omit-tag=""
   tal:define="portal_type context/portal_type;
               useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
               useView python:portal_type in useViewTypes;
@@ -10,7 +10,6 @@
               held_position_macro macros/held_position | nothing;
               showHeldPositionMacro python:held_position_macro;
               person context/get_person;">
-
   <a tal:define="
       title context/get_full_title|string:;
       url context/absolute_url|string:#;

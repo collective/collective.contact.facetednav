@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-07-03 22:47+0000\n"
+"POT-Creation-Date: 2014-03-14 20:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,40 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.contact.facetednav\n"
 
+#: ../vocabularies.py:20
+msgid "Contacts"
+msgstr ""
+
+#: ../browser/subtyper.py:82
+msgid "Contacts selection disabled"
+msgstr ""
+
+#: ../browser/subtyper.py:76
+msgid "Contacts selection enabled"
+msgstr ""
+
+#: ../browser/batchactions/delete.py:10
+msgid "Delete selected contacts"
+msgstr ""
+
 #: ../vocabularies.py:19
 msgid "Organizations"
 msgstr ""
 
-#: ../vocabularies.py:20
+#: ../vocabularies.py:21
 msgid "Persons"
+msgstr ""
+
+#: ../browser/batchactions/batchactions.pt:8
+msgid "Select all"
+msgstr ""
+
+#: ../browser/batchactions/batchactions.pt:8
+msgid "Unselect all"
+msgstr ""
+
+#. Default: "Selected contacts: ${num}"
+#: ../browser/batchactions/batchactions.pt:21
+msgid "selected_contacts_num"
 msgstr ""
 

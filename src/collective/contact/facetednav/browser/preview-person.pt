@@ -3,6 +3,7 @@
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   i18n:domain="collective.contact.facetednav"
+  tal:omit-tag=""
   tal:define="portal_type context/portal_type;
               useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
               useView python:portal_type in useViewTypes;

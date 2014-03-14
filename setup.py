@@ -42,6 +42,7 @@ setup(
     zip_safe=False,
     install_requires=[
         'collective.contact.core > 1.0',
+        'collective.js.backbone',
         'ecreall.helpers.upgrade',
         'eea.facetednavigation >= 5.8',
         'five.grok',

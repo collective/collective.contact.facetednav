@@ -10,6 +10,7 @@
 
 .template-facetednavigation_view #faceted-results .contact-photo {
     float: left;
+    margin-right: 14px;
 }
 
 .template-facetednavigation_view #faceted-results .organization-logo {
@@ -43,4 +44,14 @@
 
 .template-facetednavigation_view #faceted-results .contact-entry .contact-info .held_position {
     padding-top: 0.3em;
+}
+
+.template-facetednavigation_view #faceted-results .contact-selection{
+    float: left;
+    margin-right: 14px;
+    margin-top: 22px;
+}
+
+.template-facetednavigation_view #faceted-results #contacts-selection-num{
+    margin-left: 14px;
 }

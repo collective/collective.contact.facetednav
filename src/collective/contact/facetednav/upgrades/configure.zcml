@@ -4,6 +4,7 @@
     i18n_domain="collective.contact.facetednav">
 
   <include package="ecreall.helpers.upgrade" />
+  <include package="collective.js.backbone" />
 
   <genericsetup:registerProfile
       name="v2"
@@ -19,6 +20,14 @@
       source="1"
       destination="2"
       handler=".upgrades.v2"
+      profile="collective.contact.facetednav:default" />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 2 to 3"
+      description="Add action and javascript for contact selection"
+      source="2"
+      destination="3"
+      handler=".upgrades.v3"
       profile="collective.contact.facetednav:default" />
 
 </configure>

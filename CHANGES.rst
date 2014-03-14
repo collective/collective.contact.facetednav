@@ -5,6 +5,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- Add an optional and pluggable system
+  to provide batch actions on contacts faceted navigation.
+  [thomasdesvenain]
+
 - Display for held positions.
   [thomasdesvenain]
 

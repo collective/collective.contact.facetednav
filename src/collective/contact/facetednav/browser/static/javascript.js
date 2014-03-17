@@ -14,21 +14,23 @@ contactfacetednav.init = function() {
     });
 
     jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
-        if (!Faceted.b_start_changed) {
-            contactfacetednav.contacts = new contactfacetednav.Contacts();
-        } else {
-            contactfacetednav.contacts.each(function(contact) {
+        jQuery('#contact-selection-buttons').each(function(){
+            if (!Faceted.b_start_changed) {
+                contactfacetednav.contacts = new contactfacetednav.Contacts();
+            } else {
+                contactfacetednav.contacts.each(function(contact) {
+                    contact.render();
+                });
+            }
+            contactfacetednav.contacts.render();
+            jQuery('.contact-entry input').click(function() {
+                var input = jQuery(this);
+                var uid = input.attr('id').split('-')[1];
+                var contact = contactfacetednav.contacts.get(uid);
+                var selected = input.attr('checked') == 'checked';
+                contact.setSelected(selected);
                 contact.render();
             });
-        }
-        contactfacetednav.contacts.render();
-        jQuery('.contact-entry input').click(function() {
-            var input = jQuery(this);
-            var uid = input.attr('id').split('-')[1];
-            var contact = contactfacetednav.contacts.get(uid);
-            var selected = input.attr('checked') == 'checked';
-            contact.setSelected(selected);
-            contact.render();
         });
 
     });

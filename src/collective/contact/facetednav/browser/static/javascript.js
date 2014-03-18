@@ -69,10 +69,10 @@ contactfacetednav.Contact = Backbone.Model.extend({
             return;
         }
         else if (this.isSelected()) {
-            input.attr('checked', true);
+            input.prop('checked', true);
         }
         else{
-            input.attr('checked', false);
+            input.prop('checked', false);
         }
 
     }
@@ -143,6 +143,7 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         jQuery('#contacts-selection-num .num').text(selection_length);
     }
 });
+
 
 jQuery(document).ready(contactfacetednav.init);
 

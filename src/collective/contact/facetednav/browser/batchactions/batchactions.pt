@@ -4,7 +4,9 @@
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="collective.contact.facetednav"
+  tal:omit-tag=""
   >
+  <div id="contacts-facetednav-batchactions">
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
      Status message
     </div>
@@ -24,5 +26,5 @@
 	<span i18n:translate="selected_contacts_num" id="contacts-selection-num">
 		Selected contacts: <span i18n:name="num" class="num">0</span>
     </span>
-
+  </div>
 </html>

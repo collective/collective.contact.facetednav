@@ -20,7 +20,8 @@ class DeleteAction(ActionBase):
     def onclick(self):
         return 'contactfacetednav.delete_selection("%s")' % translate(
                     _('confirm_delete_selection',
-                      default=u"Are you sure you want to remove $num selected content(s) ?"))
+                      default=u"Are you sure you want to remove $num selected content(s) ?"),
+                    context=self.request)
 
 
 class DeleteSelection(BrowserView):

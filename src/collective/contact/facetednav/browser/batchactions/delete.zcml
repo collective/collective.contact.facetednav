@@ -5,7 +5,7 @@
     i18n_domain="collective.contact.facetednav">
 
   <browser:viewlet
-      name="plone.path_bar"
+      name="collective.contact.facetednav.batchactions.delete"
       manager="collective.contact.facetednav.browser.batchactions.manager.IBatchActions"
       class="collective.contact.facetednav.browser.batchactions.delete.DeleteAction"
       permission="zope2.DeleteObjects"

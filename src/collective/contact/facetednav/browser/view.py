@@ -28,7 +28,6 @@ def json_output(method):
     return json_method
 
 
-
 class JSONContacts(FacetedQueryHandler):
     """JSON view that gets with all values without batch in json
     """
@@ -54,7 +53,8 @@ class JSONContacts(FacetedQueryHandler):
         self.brains = self.query(**kwargs)
         infos = []
         for brain in self.brains:
-            info = {'id': brain.UID}
+            info = {'id': brain.UID,
+                    'path': brain.getPath()}
             infos.append(info)
 
         return infos

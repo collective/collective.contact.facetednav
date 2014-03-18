@@ -53,16 +53,17 @@ class TestInstall(IntegrationTestCase):
     def test_json_contacts(self):
         login(self.portal, TEST_USER_NAME)
         directory = self.portal.mydirectory
-        json_contacts = directory.unrestrictedTraverse('@@json-contacts')()
-        self.assertTrue(eval(json_contacts)[0].has_key('id'))
 
         self.portal.REQUEST.form['type'] = 'organization'
-        json_contacts = directory.unrestrictedTraverse('@@json-contacts')()
-        self.assertEqual(len(eval(json_contacts)), 7)
+        json_contacts = eval(directory.unrestrictedTraverse('@@json-contacts')())
+        self.assertEqual(len(json_contacts), 7)
+        self.assertTrue(json_contacts[0].has_key('id'))
+        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/armeedeterre')
 
         self.portal.REQUEST.form['type'] = 'held_position'
-        json_contacts = directory.unrestrictedTraverse('@@json-contacts')()
-        self.assertEqual(len(eval(json_contacts)), 4)
+        json_contacts = eval(directory.unrestrictedTraverse('@@json-contacts')())
+        self.assertEqual(len(json_contacts), 4)
+        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/degaulle/adt')
 
     def test_delete_action(self):
         login(self.portal, TEST_USER_NAME)

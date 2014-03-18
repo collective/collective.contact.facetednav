@@ -40,6 +40,7 @@ contactfacetednav.Contact = Backbone.Model.extend({
 
     defaults : {
         id : "?????????????????",
+        path : "?????????????????",
         selected : false,
     },
 
@@ -55,6 +56,10 @@ contactfacetednav.Contact = Backbone.Model.extend({
 
     isSelected : function() {
         return this.get('selected');
+    },
+
+    getPath : function() {
+        return this.get('path');
     },
 
     render : function() {
@@ -111,6 +116,14 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         }
         return uids;
     },
+    selection_pathes: function(){
+        var uids = [];
+        var selection = this.selection();
+        for(var num in selection){
+            uids.push(selection[num].getPath());
+        }
+        return uids;
+    },
     hasSelection: function(){
         return this.selection().length > 0;
     },
@@ -139,20 +152,20 @@ contactfacetednav.serialize_uids = function(uids){
     return jQuery.param({'uids:list': uids}, true);
 };
 
-contactfacetednav.delete_selection = function(){
-    uids = contactfacetednav.contacts.selection_uids();
-    if(confirm("Are you sure you want to remove " + uids.length + " selected contacts ?")){
+contactfacetednav.serialize_pathes = function(pathes){
+    /* Helpers to prepare sending pathes list the more convenient way
+     */
+    return jQuery.param({'pathes:list': pathes}, true);
+};
+
+contactfacetednav.delete_selection = function(confirm_msg){
+    var uids = contactfacetednav.contacts.selection_uids();
+    confirm_msg = confirm_msg.replace('$num', uids.length);
+    if(confirm(confirm_msg)){
         var base_url = jQuery('base').attr('href');
         jQuery.post(base_url + '/delete_selection',
                     contactfacetednav.serialize_uids(uids),
-                     function(fails){
-                        console.log(fails);
-                        if(fails.length > 0){
-                            alert("You couldn't delete " + fails.length + " contents");
-                        }
-                        Faceted.Form.do_form_query();
-                     },
-                     'json'
-                    );
+                     function(fails){Faceted.Form.do_form_query();}
+        );
         }
 };

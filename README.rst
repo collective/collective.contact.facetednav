@@ -15,5 +15,5 @@ By default, you have a "delete" action.
 You can add new actions, adding viewlets to collective.contact.facetednav.batchactions
 viewlet manager (collective.contact.facetednav.batchactions.manager.IBatchActions interface)
 You have to write the javascript code to handle it.
-Some api will help you to handle the list of selected contents uids.
+Some api will help you to handle the list of selected contents uids and pathes.
 Use delete action as a model.

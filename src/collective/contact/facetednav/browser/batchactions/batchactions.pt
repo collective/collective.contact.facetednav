@@ -1,9 +1,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
   lang="en"
   xmlns:tal="http://xml.zope.org/namespaces/tal"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="collective.contact.facetednav"
   >
+    <div metal:use-macro="context/global_statusmessage/macros/portal_message">
+     Status message
+    </div>
+
     <input type="button" name="selectall"
            id="contacts-selectall"
            class="standalone"

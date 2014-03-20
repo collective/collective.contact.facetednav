@@ -1,13 +1,14 @@
+from zope.i18n import translate
+
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
+from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
+from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 
 from collective.contact.facetednav.browser.view import json_output
 from collective.contact.facetednav.browser.batchactions.base import ActionBase
 from collective.contact.facetednav import _
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
-from zope.i18n import translate
-from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 
 
 class DeleteAction(ActionBase):

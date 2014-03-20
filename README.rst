@@ -10,7 +10,10 @@ for more information about those amazing products.
 This faceted navigation has a pluggable and optional feature that allows user
 to select contacts and apply batch actions on them.
 You have to "Enable contacts selection" on directory actions.
+
 By default, you have a "delete" action.
+If you have installed collective.excelexport, you also have an excel export button.
+
 
 You can add new actions, adding viewlets to collective.contact.facetednav.batchactions
 viewlet manager (collective.contact.facetednav.batchactions.manager.IBatchActions interface)

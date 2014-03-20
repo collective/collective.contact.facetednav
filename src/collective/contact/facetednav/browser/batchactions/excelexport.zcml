@@ -1,0 +1,22 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.contact.facetednav">
+
+  <browser:viewlet
+      name="collective.contact.facetednav.batchactions.excelexport"
+      manager="collective.contact.facetednav.browser.batchactions.manager.IBatchActions"
+      class="collective.contact.facetednav.browser.batchactions.excelexport.ExcelExportAction"
+      permission="zope2.View"
+      />
+<!--
+  <browser:page
+  	name="delete_selection"
+  	attribute="delete"
+  	for="collective.contact.core.content.directory.IDirectory"
+  	class="collective.contact.facetednav.browser.batchactions.excelexport.DeleteSelection"
+    permission="zope2.DeleteObjects"
+  	/>
+ -->
+</configure>

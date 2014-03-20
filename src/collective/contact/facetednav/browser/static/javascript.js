@@ -177,10 +177,9 @@ contactfacetednav.excel_export = function(){
     var form = jQuery('<form action="' + url + '" method="post"></form>');
 
     for(var num in uids){
-        form.append('<input type="hidden" name="UID:list" value="' + uids[num] + '" />')
+        form.append('<input type="hidden" name="UID:list" value="' + uids[num] + '" />');
     }
     jQuery('body').append(form);
-    console.log(form);
     form.submit();
     form.remove();
-}
+};

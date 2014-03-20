@@ -45,7 +45,6 @@ setup(
         'collective.js.backbone',
         'ecreall.helpers.upgrade',
         'eea.facetednavigation >= 5.8',
-        'five.grok',
         'plone.api',
         'setuptools',
     ],

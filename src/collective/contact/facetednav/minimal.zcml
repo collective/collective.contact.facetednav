@@ -11,7 +11,6 @@
 
     <five:registerPackage package="." initialize=".initialize" />
 
-    <include package="five.grok" />
     <include package="plone.api" />
     <include package="plone.behavior" file="meta.zcml" />
     <include package="collective.contact.core" />
@@ -21,8 +20,6 @@
 
     <include package=".browser" />
     <include package=".upgrades" />
-
-    <grok:grok package="." />
 
     <genericsetup:registerProfile
         name="default"

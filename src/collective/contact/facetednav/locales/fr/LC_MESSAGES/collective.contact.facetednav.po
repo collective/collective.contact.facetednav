@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-18 18:43+0000\n"
+"POT-Creation-Date: 2014-03-20 13:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,9 +26,13 @@ msgstr "La sélection de contacts a été désactivée"
 msgid "Contacts selection enabled"
 msgstr "La sélection de contacts a été activée"
 
-#: ../browser/batchactions/delete.py:15
+#: ../browser/batchactions/delete.py:16
 msgid "Delete selected contacts"
 msgstr "Supprimer les contacts sélectionnés"
+
+#: ../browser/batchactions/excelexport.py:7
+msgid "Excel export"
+msgstr "Export excel"
 
 #: ../vocabularies.py:19
 msgid "Organizations"
@@ -42,7 +46,7 @@ msgstr "Personnes"
 msgid "Select all"
 msgstr "Tout sélectionner"
 
-#: ../browser/batchactions/delete.py:41
+#: ../browser/batchactions/delete.py:43
 msgid "Unauthorized: ${path}"
 msgstr "Non autorisé : ${path}"
 
@@ -51,17 +55,17 @@ msgid "Unselect all"
 msgstr "Tout déselectionner"
 
 #. Default: "Are you sure you want to remove $num selected content(s) ?"
-#: ../browser/batchactions/delete.py:22
+#: ../browser/batchactions/delete.py:23
 msgid "confirm_delete_selection"
 msgstr "Êtes-vous certain de vouloir supprimer les $num contacts sélectionnés ?"
 
 #. Default: "${num} object(s) were not deleted : ${fails}"
-#: ../browser/batchactions/delete.py:58
+#: ../browser/batchactions/delete.py:60
 msgid "msg_objects_delete_failed"
 msgstr "${num} contacts(s) n'a/n'ont pas été supprimé(s) : ${fails}"
 
 #. Default: "${num} object(s) deleted"
-#: ../browser/batchactions/delete.py:53
+#: ../browser/batchactions/delete.py:55
 msgid "msg_objects_deleted"
 msgstr "${num} contacts(s) supprimés"
 

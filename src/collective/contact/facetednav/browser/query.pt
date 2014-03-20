@@ -5,7 +5,7 @@
   folderContents view/brains;
   contentFilter python: {'portal_type': 'FACET-EMPTY'} if not folderContents else {};
   here python:view.get_context(folderContents);
-  is_selectable view/is_selectable">
+  actions_enabled view/actions_enabled">
   <tal:def define="
     kssClassesView context/@@kss_field_decorator_view | nothing;
     getKssClasses nocall:kssClassesView/getKssClassesInlineEditable | nothing;

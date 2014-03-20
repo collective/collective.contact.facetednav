@@ -50,4 +50,6 @@
        tal:content="held_position/email"></a>
 
   </div>
+
+  <tal:buttons content="structure provider:collective.contact.facetednav.actions" />
 </div>

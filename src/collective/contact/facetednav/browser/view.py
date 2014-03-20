@@ -4,19 +4,21 @@ from Products.Five import BrowserView
 
 from eea.facetednavigation.browser.app.query import FacetedQueryHandler
 
-from collective.contact.facetednav.interfaces import ISelectableContacts
+from collective.contact.facetednav.interfaces import IActionsEnabled
 
-
-IS_SELECTABLE_KEY = 'collective.contact.facetednav.is_selectable'
 
 class PreviewItem(BrowserView):
+    # ????
     pass
 
+ACTIONS_ENABLED_KEY = 'collective.contact.facetednav.actions_enabled'
 
 class ContactsFacetedQueryHandler(FacetedQueryHandler):
 
-    def is_selectable(self):
-        return ISelectableContacts.providedBy(self.context)
+    def actions_enabled(self):
+        enabled = IActionsEnabled.providedBy(self.context)
+        self.request.set(ACTIONS_ENABLED_KEY, enabled)
+        return enabled
 
 
 def json_output(method):

@@ -16,16 +16,15 @@
         ">
 
        <tal:results condition="batch">
-		<div id="contact-selection-buttons" tal:condition="is_selectable">
-	      <tal:buttons content="structure provider:collective.contact.facetednav.batchactions" />
-        </div>
+         <tal:buttons condition="actions_enabled"
+                      content="structure provider:collective.contact.facetednav.batchactions" />
         <div metal:use-macro="context/batch_macros/macros/navigation"></div>
 
         <div class="eea-preview-items">
           <tal:entries repeat="brain batch">
            <div class="contact-entry"
                 tal:define="doc brain/getObject|nothing">
-              <div tal:condition="is_selectable" class="contact-selection">
+              <div tal:condition="actions_enabled" class="contact-selection">
                 <input type="checkbox"
                        tal:attributes="value doc/UID;
                                        id string:contact-${doc/UID}" />

@@ -2,7 +2,7 @@
   lang="en"
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  i18n:domain="eea">
+  i18n:domain="collective.contact.facetednav">
 
     <input type="button"
            class="context"
@@ -10,7 +10,8 @@
                            id string:contact-facetednav-action-${view/name};
                            class view/klass|default;
                            value view/label;
-                           onclick view/onclick;"
+                           onclick view/onclick|nothing;
+                           "
            i18n:attributes="value" />
 
 </html>

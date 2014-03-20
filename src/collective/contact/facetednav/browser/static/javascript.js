@@ -14,7 +14,7 @@ contactfacetednav.init = function() {
     });
 
     jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
-        jQuery('#contact-selection-buttons').each(function(){
+        jQuery('#contacts-facetednav-batchactions').each(function(){
             if (!Faceted.b_start_changed) {
                 contactfacetednav.contacts = new contactfacetednav.Contacts();
             } else {
@@ -183,3 +183,30 @@ contactfacetednav.excel_export = function(){
     form.submit();
     form.remove();
 };
+
+jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
+    jQuery('#faceted-results .delete-contact').each(function(){
+        var link = jQuery(this);
+        link.prepOverlay({
+                subtype: 'ajax',
+                filter: common_content_filter,
+                formselector: '#delete_confirmation',
+                closeselector: '[name="form.button.Cancel"]',
+                noform: function(el, pbo) {
+                    Faceted.Form.do_form_query();
+                    return 'close';},
+              });
+    });
+    jQuery('#faceted-results .edit-contact').each(function(){
+        var link = jQuery(this);
+        link.prepOverlay({
+                subtype: 'ajax',
+                filter: common_content_filter,
+                formselector: '#form',
+                closeselector: '[name="form.button.Cancel"]',
+                noform: function(el, pbo) {
+                    Faceted.Form.do_form_query();
+                    return 'close';},
+              });
+    });
+});

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2014-03-20 13:26+0000\n"
+"POT-Creation-Date: 2014-03-20 18:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,18 +19,26 @@ msgid "Contacts"
 msgstr "Contacts"
 
 #: ../browser/subtyper.py:83
-msgid "Contacts selection disabled"
-msgstr "La sélection de contacts a été désactivée"
+msgid "Contacts actions disabled"
+msgstr "Les actions sur les contacts ont été désactivées"
 
 #: ../browser/subtyper.py:77
-msgid "Contacts selection enabled"
-msgstr "La sélection de contacts a été activée"
+msgid "Contacts actions enabled"
+msgstr "Les actions sur les contacts ont été activées"
 
-#: ../browser/batchactions/delete.py:16
+#: ../browser/actions/delete.py:16
 msgid "Delete selected contacts"
 msgstr "Supprimer les contacts sélectionnés"
 
-#: ../browser/batchactions/excelexport.py:7
+#: ../profiles/default/actions.xml
+msgid "Disable actions"
+msgstr "Désactiver les actions"
+
+#: ../profiles/default/actions.xml
+msgid "Enable actions"
+msgstr "Activer les actions"
+
+#: ../browser/actions/excelexport.py:7
 msgid "Excel export"
 msgstr "Export excel"
 
@@ -42,35 +50,35 @@ msgstr "Organisations"
 msgid "Persons"
 msgstr "Personnes"
 
-#: ../browser/batchactions/batchactions.pt:14
+#: ../browser/actions/batchactions.pt:14
 msgid "Select all"
 msgstr "Tout sélectionner"
 
-#: ../browser/batchactions/delete.py:43
+#: ../browser/actions/delete.py:43
 msgid "Unauthorized: ${path}"
 msgstr "Non autorisé : ${path}"
 
-#: ../browser/batchactions/batchactions.pt:14
+#: ../browser/actions/batchactions.pt:14
 msgid "Unselect all"
 msgstr "Tout déselectionner"
 
 #. Default: "Are you sure you want to remove $num selected content(s) ?"
-#: ../browser/batchactions/delete.py:23
+#: ../browser/actions/delete.py:23
 msgid "confirm_delete_selection"
 msgstr "Êtes-vous certain de vouloir supprimer les $num contacts sélectionnés ?"
 
 #. Default: "${num} object(s) were not deleted : ${fails}"
-#: ../browser/batchactions/delete.py:60
+#: ../browser/actions/delete.py:60
 msgid "msg_objects_delete_failed"
 msgstr "${num} contacts(s) n'a/n'ont pas été supprimé(s) : ${fails}"
 
 #. Default: "${num} object(s) deleted"
-#: ../browser/batchactions/delete.py:55
+#: ../browser/actions/delete.py:55
 msgid "msg_objects_deleted"
 msgstr "${num} contacts(s) supprimés"
 
 #. Default: "Selected contacts: ${num}"
-#: ../browser/batchactions/batchactions.pt:27
+#: ../browser/actions/batchactions.pt:27
 msgid "selected_contacts_num"
 msgstr "${num} contacts sélectionnés"
 

@@ -38,17 +38,17 @@ class TestInstall(IntegrationTestCase):
         directory = self.portal.mydirectory
         subtyper = directory.unrestrictedTraverse('@@contact_faceted_subtyper')
 
-        subtyper.enable_select()
-        self.assertTrue(subtyper.can_select)
-        self.assertFalse(subtyper.can_enable_select())
-        self.assertTrue(subtyper.can_disable_select())
-        self.assertTrue(directory.unrestrictedTraverse('@@faceted_query').is_selectable())
+        subtyper.enable_actions()
+        self.assertTrue(subtyper.can_actions)
+        self.assertFalse(subtyper.can_enable_actions())
+        self.assertTrue(subtyper.can_disable_actions())
+        self.assertTrue(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
 
-        subtyper.disable_select()
-        self.assertFalse(subtyper.can_select)
-        self.assertTrue(subtyper.can_enable_select())
-        self.assertFalse(subtyper.can_disable_select())
-        self.assertFalse(directory.unrestrictedTraverse('@@faceted_query').is_selectable())
+        subtyper.disable_actions()
+        self.assertFalse(subtyper.can_actions)
+        self.assertTrue(subtyper.can_enable_actions())
+        self.assertFalse(subtyper.can_disable_actions())
+        self.assertFalse(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
 
     def test_json_contacts(self):
         login(self.portal, TEST_USER_NAME)

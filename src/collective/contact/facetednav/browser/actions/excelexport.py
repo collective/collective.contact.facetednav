@@ -1,8 +1,8 @@
-from collective.contact.facetednav.browser.batchactions.base import ActionBase
+from collective.contact.facetednav.browser.actions.base import BatchActionBase
 from collective.contact.facetednav import _
 
 
-class ExcelExportAction(ActionBase):
+class ExcelExportAction(BatchActionBase):
 
     label = _("Excel export")
     name = 'excelexport'

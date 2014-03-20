@@ -8,8 +8,9 @@
     i18n_domain="collective.contact.facetednav">
 
 	<include file="minimal.zcml" />
-	<include file="browser/batchactions/delete.zcml" />
-    <include file="browser/batchactions/excelexport.zcml"
+	<include file="browser/actions/delete.zcml" />
+	<include file="browser/actions/edit.zcml" />
+    <include file="browser/actions/excelexport.zcml"
              zcml:condition="installed collective.excelexport" />
 
 </configure>

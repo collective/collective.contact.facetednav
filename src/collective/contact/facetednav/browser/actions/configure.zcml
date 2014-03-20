@@ -12,4 +12,12 @@
     template="batchactions.pt"
     />
 
+   <browser:viewletManager
+    name="collective.contact.facetednav.actions"
+    provides=".manager.IActions"
+    permission="zope2.View"
+    class=".manager.ActionsViewletManager"
+    template="actions.pt"
+    />
+
 </configure>

@@ -83,5 +83,5 @@
     layer="collective.contact.facetednav.interfaces.ICollectiveContactFacetednavLayer"
     permission="zope2.View"
   	/>
-  <include package=".batchactions" />
+  <include package=".actions" />
 </configure>

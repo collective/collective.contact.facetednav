@@ -6,8 +6,9 @@ Changelog
 ----------------
 
 - Add an optional and pluggable system
-  to provide batch actions on contacts faceted navigation.
-  with two examples : delete and export (when collective.excelexport installed)
+  to provide actions and batch actions on contacts faceted navigation.
+  with two examples of batch actions : delete and export (when collective.excelexport installed)
+  and two actions: delete and edit.
   [thomasdesvenain]
 
 - Display for held positions.

@@ -8,7 +8,7 @@ from Products.statusmessages.interfaces import IStatusMessage
 from Products.Five.browser import BrowserView
 
 from collective.contact.facetednav.browser.interfaces import IContactFacetedSubtyper
-from collective.contact.facetednav.interfaces import ISelectableContacts
+from collective.contact.facetednav.interfaces import IActionsEnabled
 from collective.contact.facetednav import _
 
 
@@ -28,28 +28,28 @@ class ContactFacetedPublicSubtyper(BrowserView):
         return msg
 
     @property
-    def can_select(self):
-        return ISelectableContacts.providedBy(self.context)
+    def can_actions(self):
+        return IActionsEnabled.providedBy(self.context)
 
-    def can_enable_select(self):
+    def can_enable_actions(self):
         """Can enable selection
         """
         return False
 
-    def can_disable_select(self):
+    def can_disable_actions(self):
         """Can disable selection
         """
         return False
 
-    def enable_select(self):
+    def enable_actions(self):
         """Enable selection
         """
-        raise NotFound(self.context, 'enable_select', self.request)
+        raise NotFound(self.context, 'enable_actions', self.request)
 
-    def disable_select(self):
+    def disable_actions(self):
         """Disable selection
         """
-        raise NotFound(self.context, 'disable_select', self.request)
+        raise NotFound(self.context, 'disable_actions', self.request)
 
 
 class ContactFacetedSubtyper(ContactFacetedPublicSubtyper):
@@ -57,27 +57,27 @@ class ContactFacetedSubtyper(ContactFacetedPublicSubtyper):
         view for IPossibleFacetedNavigable objects
     """
 
-    def can_enable_select(self):
-        """ See IFacetedSubtyper
+    def can_enable_actions(self):
         """
-        return not self.can_select
+        """
+        return not self.can_actions
 
-    def can_disable_select(self):
-        """ See IFacetedSubtyper
+    def can_disable_actions(self):
         """
-        return self.can_select
+        """
+        return self.can_actions
 
-    def enable_select(self):
-        """ See IFacetedSubtyper
+    def enable_actions(self):
         """
-        if not self.can_enable_select():
+        """
+        if not self.can_enable_actions():
             return self._redirect('Faceted navigation not supported')
-        alsoProvides(self.context, ISelectableContacts)
+        alsoProvides(self.context, IActionsEnabled)
 
-        self._redirect(_('Contacts selection enabled'))
+        self._redirect(_('Contacts actions enabled'))
 
-    def disable_select(self):
-        """ See IFacetedSubtyper
+    def disable_actions(self):
         """
-        noLongerProvides(self.context, ISelectableContacts)
-        self._redirect(_('Contacts selection disabled'))
+        """
+        noLongerProvides(self.context, IActionsEnabled)
+        self._redirect(_('Contacts actions disabled'))

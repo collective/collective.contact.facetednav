@@ -6,21 +6,21 @@ class IContactFacetedSubtyper(Interface):
     """ Support for subtyping objects
     """
 
-    can_select = schema.Bool(u'Can enable contacts selection on faceted navigation')
+    actionsad = schema.Bool(u'Can enable contacts selection on faceted navigation')
 
-    def can_enable_select(self):
+    def can_enable_actions(self):
         """Enable selection
         """
 
-    def can_disable_select(self):
+    def can_disable_actions(self):
         """Enable selection
         """
 
-    def enable_select(self):
+    def enable_actions(self):
         """Enable selection
         """
 
-    def disable_select(self):
+    def disable_actions(self):
         """Enable selection
         """
 

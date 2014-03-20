@@ -7,11 +7,12 @@ from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
 from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 
 from collective.contact.facetednav.browser.view import json_output
-from collective.contact.facetednav.browser.batchactions.base import ActionBase
+from collective.contact.facetednav.browser.actions.base import (
+    ActionBase, BatchActionBase)
 from collective.contact.facetednav import _
 
 
-class DeleteAction(ActionBase):
+class DeleteBatchAction(BatchActionBase):
 
     label = _("Delete selected contacts")
     name = 'delete'
@@ -62,3 +63,13 @@ class DeleteSelection(BrowserView):
                         mapping={'num': len(fails), 'fails': ", ".join(fails)}),
                       'error')
 
+
+class DeleteAction(ActionBase):
+
+    klass = 'delete-contact'
+    name = 'delete-contact'
+    icon = 'delete_icon.png'
+    title = _(u"Delete this contact")
+
+    def url(self):
+        return "%s/delete_confirmation" % self.context.absolute_url()

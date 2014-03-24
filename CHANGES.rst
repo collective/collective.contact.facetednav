@@ -5,6 +5,10 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- When we get no results, we get a link to create a new person or organization.
+  Name is pre-filled with text search.
+  [thomasdesvenain]
+
 - Add an optional and pluggable system
   to provide actions and batch actions on contacts faceted navigation.
   with two examples of batch actions : delete and export (when collective.excelexport installed)

@@ -30,4 +30,12 @@
       handler=".upgrades.v3"
       profile="collective.contact.facetednav:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 3 to 4"
+      description="Refresh js et css"
+      source="3"
+      destination="4"
+      handler=".upgrades.v4"
+      profile="collective.contact.facetednav:default" />
+
 </configure>

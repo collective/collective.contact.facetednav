@@ -32,7 +32,16 @@ contactfacetednav.init = function() {
                 contact.render();
             });
         });
+        jQuery('#faceted-add-contact a').prepOverlay({
+            subtype: 'ajax',
+            filter: common_content_filter,
+            formselector: '#form',
+            closeselector: '[name="form.buttons.cancel"]',
+            noform: function(el, pbo) {
+                Faceted.Form.do_form_query();
+                return 'close';},
 
+        });
     });
 };
 
@@ -191,7 +200,7 @@ jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
                 subtype: 'ajax',
                 filter: common_content_filter,
                 formselector: '#delete_confirmation',
-                closeselector: '[name="form.button.Cancel"]',
+                closeselector: '[name="cancel"]',
                 noform: function(el, pbo) {
                     Faceted.Form.do_form_query();
                     return 'close';},
@@ -203,7 +212,7 @@ jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
                 subtype: 'ajax',
                 filter: common_content_filter,
                 formselector: '#form',
-                closeselector: '[name="form.button.Cancel"]',
+                closeselector: '[name="form.button.cancel"]',
                 noform: function(el, pbo) {
                     Faceted.Form.do_form_query();
                     return 'close';},

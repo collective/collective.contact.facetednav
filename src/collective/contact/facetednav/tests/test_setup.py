@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for this package."""
 
-from collective.contact.facetednav.testing import IntegrationTestCase
+from zope.interface.declarations import alsoProvides
 from plone import api
 from plone.app.testing.helpers import login
 from plone.app.testing.interfaces import TEST_USER_NAME
 from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
+from collective.contact.facetednav.testing import IntegrationTestCase
+from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
+
 
 class TestInstall(IntegrationTestCase):
     """Test installation of collective.contact.facetednav into Plone."""
@@ -29,15 +32,14 @@ class TestInstall(IntegrationTestCase):
     # browserlayer.xml
     def test_browserlayer(self):
         """Test that ICollectiveContactFacetednavLayer is registered."""
-        from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
         from plone.browserlayer import utils
         self.failUnless(ICollectiveContactFacetednavLayer in utils.registered_layers())
 
     def test_subtyper(self):
         login(self.portal, TEST_USER_NAME)
         directory = self.portal.mydirectory
+        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
         subtyper = directory.unrestrictedTraverse('@@contact_faceted_subtyper')
-
         subtyper.enable_actions()
         self.assertTrue(subtyper.can_actions)
         self.assertFalse(subtyper.can_enable_actions())
@@ -52,6 +54,7 @@ class TestInstall(IntegrationTestCase):
 
     def test_json_contacts(self):
         login(self.portal, TEST_USER_NAME)
+        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
         directory = self.portal.mydirectory
 
         self.portal.REQUEST.form['type'] = 'organization'

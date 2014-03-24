@@ -21,3 +21,19 @@ You have to write the javascript code to handle it.
 
 Some api will help you to handle the list of selected contents uids and pathes.
 Use delete action as a model.
+
+
+Installation
+============
+
+* Add collective.contact.facetednav to your eggs.
+* Re-run buildout.
+* Install the product in your plone site.
+
+Tests
+=====
+
+This add-on is tested using Travis CI. The current status of the add-on is :
+
+.. image:: https://secure.travis-ci.org/collective/collective.contact.facetednav.png
+    :target: http://travis-ci.org/collective/collective.contact.facetednav

@@ -3,6 +3,7 @@ var contactfacetednav = {};
 contactfacetednav.selectionchange = jQuery.Event('selectionchange');
 
 contactfacetednav.init = function() {
+    contactfacetednav.status_messages = null;
     Backbone.emulateHTTP = true;
     Backbone.emulateJSON = true;
     jQuery('body').on('click', '#contacts-selectall', function() {
@@ -31,6 +32,7 @@ contactfacetednav.init = function() {
                 contact.setSelected(selected);
                 contact.render();
             });
+            contactfacetednav.show_messages();
         });
         jQuery('#faceted-add-contact a').prepOverlay({
             subtype: 'ajax',
@@ -43,6 +45,17 @@ contactfacetednav.init = function() {
 
         });
     });
+};
+
+contactfacetednav.store_overlay_messages = function(el){
+    contactfacetednav.status_messages = jQuery(el).find('.portalMessage');
+};
+
+contactfacetednav.show_messages = function(){
+    if(contactfacetednav.status_messages !== null){
+        jQuery('#contacts-facetednav-batchactions').prepend(contactfacetednav.status_messages);
+        contactfacetednav.status_messages = null;
+    }
 };
 
 contactfacetednav.Contact = Backbone.Model.extend({
@@ -175,9 +188,9 @@ contactfacetednav.delete_selection = function(confirm_msg){
         var base_url = jQuery('base').attr('href');
         jQuery.post(base_url + '/delete_selection',
                     contactfacetednav.serialize_uids(uids),
-                     function(fails){Faceted.Form.do_form_query();}
+                    function(fails){Faceted.Form.do_form_query();}
         );
-        }
+    }
 };
 
 contactfacetednav.excel_export = function(){

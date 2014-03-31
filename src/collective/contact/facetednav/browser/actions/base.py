@@ -7,9 +7,11 @@ class BatchActionBase(ViewletBase):
     klass = 'context'
     onclick = None
     name = None
+    weight = 1000
 
     def available(self):
         return True
+
 
 class ActionBase(ViewletBase):
     index = ViewPageTemplateFile('action.pt')
@@ -17,6 +19,7 @@ class ActionBase(ViewletBase):
     onclick = None
     icon = None
     name = None
+    weight = 1000
 
     def available(self):
         return True

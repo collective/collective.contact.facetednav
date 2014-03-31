@@ -7,6 +7,7 @@ class ExcelExportAction(BatchActionBase):
     label = _("Excel export")
     name = 'excelexport'
     klass = 'context'
+    weight = 800
 
     @property
     def onclick(self):

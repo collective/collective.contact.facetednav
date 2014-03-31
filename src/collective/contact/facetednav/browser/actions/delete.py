@@ -17,6 +17,7 @@ class DeleteBatchAction(BatchActionBase):
     label = _("Delete selected contacts")
     name = 'delete'
     klass = 'destructive'
+    weight = 500
 
     @property
     def onclick(self):
@@ -27,6 +28,7 @@ class DeleteBatchAction(BatchActionBase):
 
 
 class DeleteSelection(BrowserView):
+    weight = 500
 
     @json_output
     def delete(self):

@@ -9,6 +9,7 @@ class EditAction(ActionBase):
     name = 'edit-contact'
     icon = 'edit.png'
     title = PMF(u"Edit")
+    weight = 200
 
     def url(self):
         return "%s/edit" % self.context.absolute_url()

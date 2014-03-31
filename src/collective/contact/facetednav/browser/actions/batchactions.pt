@@ -4,6 +4,7 @@
   xmlns:metal="http://xml.zope.org/namespaces/metal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="collective.contact.facetednav"
+  tal:define="dummy view/update"
   tal:omit-tag=""
   >
   <div id="contacts-facetednav-batchactions">
@@ -20,8 +21,7 @@
             />
     <span class="contacts-buttons">
 	  <tal:viewlets repeat="viewlet view/viewlets">
-	    <tal:viewlet condition="viewlet/available"
-	                 content="structure viewlet/render" />
+	    <tal:viewlet content="structure viewlet/render" />
 	  </tal:viewlets>
 	</span>
 	<span i18n:translate="selected_contacts_num" id="contacts-selection-num">

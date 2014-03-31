@@ -8,6 +8,8 @@ class BatchActionBase(ViewletBase):
     onclick = None
     name = None
 
+    def available(self):
+        return True
 
 class ActionBase(ViewletBase):
     index = ViewPageTemplateFile('action.pt')
@@ -15,3 +17,6 @@ class ActionBase(ViewletBase):
     onclick = None
     icon = None
     name = None
+
+    def available(self):
+        return True

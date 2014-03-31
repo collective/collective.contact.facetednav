@@ -19,8 +19,9 @@
            data-unselect-all-msg="Unselect all"
             />
     <span class="contacts-buttons">
-	  <tal:viewlets repeat="viewlet view/viewlets"
-	                content="structure viewlet/render">
+	  <tal:viewlets repeat="viewlet view/viewlets">
+	    <tal:viewlet condition="viewlet/available"
+	                 content="structure viewlet/render" />
 	  </tal:viewlets>
 	</span>
 	<span i18n:translate="selected_contacts_num" id="contacts-selection-num">

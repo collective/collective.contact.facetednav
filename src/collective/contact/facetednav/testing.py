@@ -33,7 +33,6 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
         z2.installProduct(app, 'collective.contact.facetednav')
         self.loadZCML(package=collective.contact.core,
                       name='testing.zcml')
-        z2.installProduct(app, 'collective.contact.core')
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""

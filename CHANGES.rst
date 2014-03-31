@@ -5,7 +5,7 @@ Changelog
 1.1 (unreleased)
 ----------------
 
-- When we get no results, we get a link to create a new person or organization.
+- Display a link to create a new person or organization.
   Name is pre-filled with text search.
   [thomasdesvenain]
 

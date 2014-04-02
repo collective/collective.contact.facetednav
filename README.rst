@@ -27,8 +27,12 @@ Installation
 ============
 
 * Add collective.contact.facetednav to your eggs.
+* Add collective.contact.facetednav to your zcml. #It is not auto included#.
 * Re-run buildout.
 * Install the product in your plone site.
+
+If you don't want all default features, include only minimal.zcml file and
+the files you want in configure.zcml.
 
 Tests
 =====

@@ -5,6 +5,9 @@ Changelog
 1.1 (unreleased)
 ----------------
 
+- WARNING: remove auto-include.
+  [thomasdesvenain]
+
 - Display a link to create a new person or organization.
   Name is pre-filled with text search.
   [thomasdesvenain]

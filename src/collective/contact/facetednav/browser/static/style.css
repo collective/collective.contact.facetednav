@@ -54,6 +54,7 @@
 
 .template-facetednavigation_view #faceted-results #contacts-selection-num{
     margin-left: 14px;
+    white-space: nowrap;
 }
 
 .template-facetednavigation_view #faceted-results #msg-no-results,

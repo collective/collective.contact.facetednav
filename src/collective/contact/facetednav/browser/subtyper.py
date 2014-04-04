@@ -28,7 +28,7 @@ class ContactFacetedPublicSubtyper(BrowserView):
         return msg
 
     @property
-    def can_actions(self):
+    def actions_enabled(self):
         return IActionsEnabled.providedBy(self.context)
 
     def can_enable_actions(self):
@@ -60,12 +60,12 @@ class ContactFacetedSubtyper(ContactFacetedPublicSubtyper):
     def can_enable_actions(self):
         """
         """
-        return not self.can_actions
+        return not self.actions_enabled
 
     def can_disable_actions(self):
         """
         """
-        return self.can_actions
+        return self.actions_enabled
 
     def enable_actions(self):
         """

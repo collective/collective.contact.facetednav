@@ -23,9 +23,3 @@ class IContactFacetedSubtyper(Interface):
     def disable_actions(self):
         """Enable selection
         """
-
-
-class IContactPreviewItems(Interface):
-
-    def update(self):
-        pass

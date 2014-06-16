@@ -20,7 +20,6 @@
       for="collective.contact.core.content.directory.IDirectory"
       name="faceted-preview-items"
       template="preview-items.pt"
-      allowed_interface=".interfaces.IContactPreviewItems"
       permission="zope2.View" />
 
   <browser:page

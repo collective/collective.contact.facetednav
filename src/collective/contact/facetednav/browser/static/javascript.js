@@ -195,7 +195,7 @@ contactfacetednav.delete_selection = function(confirm_msg){
 
 contactfacetednav.excel_export = function(){
     var uids = contactfacetednav.contacts.selection_uids();
-    var url = portal_url + '/@@collective.excelexport?excelexport.policy=search';
+    var url = portal_url + '/@@collective.excelexport?excelexport.policy=excelexport.search';
     var form = jQuery('<form action="' + url + '" method="post"></form>');
 
     for(var num in uids){

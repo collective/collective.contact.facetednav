@@ -5,7 +5,8 @@ Changelog
 1.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Works with collective.excelexport 1.1.
+  [thomasdesvenain]
 
 
 1.1 (2014-06-16)

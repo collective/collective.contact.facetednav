@@ -5,6 +5,10 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Added 'multiple_selection' option on batch action : the action is available
+  when more than one content is selected.
+  [thomasdesvenain]
+
 - Works with collective.excelexport 1.1.
   [thomasdesvenain]
 

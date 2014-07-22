@@ -3,12 +3,11 @@
   xmlns:tal="http://xml.zope.org/namespaces/tal"
   xmlns:i18n="http://xml.zope.org/namespaces/i18n"
   i18n:domain="collective.contact.facetednav">
-
     <input type="button"
            class="context"
            tal:attributes="name view/name;
                            id string:contact-facetednav-action-${view/name};
-                           class view/klass|default;
+                           class python:(view.klass or default) + (view.multiple_selection and ' multiple-selection' or '');
                            value view/label;
                            onclick view/onclick|nothing;
                            "

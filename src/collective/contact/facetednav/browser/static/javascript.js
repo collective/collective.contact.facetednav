@@ -157,6 +157,12 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
             select_all_button.attr('title', select_all_button.attr('data-select-all-msg'));
             select_all_button.attr('value', select_all_button.attr('data-select-all-msg'));
         }
+        else if(selection_length===1){
+            jQuery('.contacts-buttons input').attr('disabled', false);
+            jQuery('.contacts-buttons input.multiple-selection').attr('disabled', true);
+            select_all_button.attr('title', select_all_button.attr('data-unselect-all-msg'));
+            select_all_button.attr('value', select_all_button.attr('data-unselect-all-msg'));
+        }
         else{
             jQuery('.contacts-buttons input').attr('disabled', false);
             select_all_button.attr('title', select_all_button.attr('data-unselect-all-msg'));

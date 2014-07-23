@@ -58,6 +58,7 @@
 }
 
 .template-facetednavigation_view #msg-no-results,
-.template-facetednavigation_view #faceted-add-contact{
+.template-facetednavigation_view #faceted-add-contact,
+.template-facetednavigation_view #faceted-add-person{
     margin: 12px 0px;
 }

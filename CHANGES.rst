@@ -5,6 +5,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- We can create a held_position from the faceted navigation view.
+  [thomasdesvenain]
+
 - Added 'multiple_selection' option on batch action : the action is available
   when more than one content is selected.
   [thomasdesvenain]

@@ -45,24 +45,38 @@
 	   </div>
 	   	<div tal:condition="python:context.portal_membership.checkPermission('Add portal content', context)"
 	   	     tal:define="search_text python:request.get('texte[]', '')"
-	   	     id="faceted-add-contact"
+	   	     id="faceted-add"
 	   	     i18n:domain="collective.contact.core">
 	   	<tal:addperson condition="python:request.get('type[]', '') in ('person', 'held_position')"
 	   	    define="splitname python:search_text.split(' ', 1);
 	   	            lastname python:splitname[-1].replace(' ', '+');
 	   	            firstname python:len(splitname)>1 and splitname[0].replace(' ', '+') or ''">
-         <a tal:attributes="href string:${context/absolute_url}/++add++person?form.widgets.lastname=${lastname}&form.widgets.firstname=${firstname}">
+         <a class="faceted-add-person"
+            tal:attributes="href string:${context/absolute_url}/++add++person?form.widgets.lastname=${lastname}&form.widgets.firstname=${firstname}">
 	 	  <img src="create_contact.png" />
 		  <span i18n:translate="">
 		   Create <tal:name i18n:name="name" i18n:translate="">Person</tal:name>
 		  </span>
 		 </a>
 	   	</tal:addperson>
+	   	<tal:addcontact condition="python:request.get('type[]', '') in ('person', 'held_position')"
+	   	    define="splitname python:search_text.split(' ', 1);
+	   	            lastname python:splitname[-1].replace(' ', '+');
+	   	            firstname python:len(splitname)>1 and splitname[0].replace(' ', '+') or ''">
+         <a class="faceted-add-contact" tal:attributes="href string:${context/absolute_url}/@@add-contact">
+	 	  <img src="create_contact.png" />
+		  <span i18n:translate="">
+		   Create <tal:name i18n:name="name" i18n:translate="">Contact</tal:name>
+		  </span>
+		 </a>
+	   	</tal:addcontact>
 	   	<tal:addorga condition="python:request.get('type[]', '') == 'organization'"
 	   	  			 define="title python:search_text.replace(' ', '+')">
 		  <a tal:attributes="href string:${context/absolute_url}/++add++organization?form.widgets.title=${title}">
 			<img src="organization_icon.png" />
-			<span i18n:translate="">Create <tal:name i18n:name="name" i18n:translate="">Organization</tal:name></span>
+			<span i18n:translate="">
+				Create <tal:name i18n:name="name" i18n:translate="">Organization</tal:name>
+		    </span>
 		  </a>
 	   	</tal:addorga>
 	   	</div>

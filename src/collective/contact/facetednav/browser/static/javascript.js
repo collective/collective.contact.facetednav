@@ -34,11 +34,21 @@ contactfacetednav.init = function() {
             });
             contactfacetednav.show_messages();
         });
-        jQuery('#faceted-add-contact a').prepOverlay({
+        jQuery('#faceted-add a.faceted-add-person, #faceted-add a.faceted-add-organization').prepOverlay({
             subtype: 'ajax',
             filter: common_content_filter,
             formselector: '#form',
             closeselector: '[name="form.buttons.cancel"]',
+            noform: function(el, pbo) {
+                Faceted.Form.do_form_query();
+                return 'close';},
+
+        });
+        jQuery('#faceted-add a.faceted-add-contact').prepOverlay({
+            subtype: 'ajax',
+            filter: common_content_filter,
+            formselector: '#oform',
+            closeselector: '[name="oform.buttons.cancel"]',
             noform: function(el, pbo) {
                 Faceted.Form.do_form_query();
                 return 'close';},

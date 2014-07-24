@@ -34,7 +34,7 @@ contactfacetednav.init = function() {
             });
             contactfacetednav.show_messages();
         });
-        jQuery('#faceted-add a.faceted-add-person, #faceted-add a.faceted-add-organization').prepOverlay({
+        jQuery('#faceted-add a.faceted-add-organization').prepOverlay({
             subtype: 'ajax',
             filter: common_content_filter,
             formselector: '#form',
@@ -52,7 +52,6 @@ contactfacetednav.init = function() {
             noform: function(el, pbo) {
                 Faceted.Form.do_form_query();
                 return 'close';},
-
         });
     });
 };

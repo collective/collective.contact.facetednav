@@ -72,7 +72,8 @@
 	   	</tal:addcontact>
 	   	<tal:addorga condition="python:request.get('type[]', '') == 'organization'"
 	   	  			 define="title python:search_text.replace(' ', '+')">
-		  <a tal:attributes="href string:${context/absolute_url}/++add++organization?form.widgets.title=${title}">
+		  <a class="faceted-add-organization"
+		     tal:attributes="href string:${context/absolute_url}/++add++organization?form.widgets.title=${title}">
 			<img src="organization_icon.png" />
 			<span i18n:translate="">
 				Create <tal:name i18n:name="name" i18n:translate="">Organization</tal:name>

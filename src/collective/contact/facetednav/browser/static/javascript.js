@@ -1,6 +1,7 @@
 var contactfacetednav = {};
 
 contactfacetednav.selectionchange = jQuery.Event('selectionchange');
+contactfacetednav.selector = '.contact-entry .contact-selection input';
 
 contactfacetednav.init = function() {
     contactfacetednav.status_messages = null;
@@ -24,7 +25,7 @@ contactfacetednav.init = function() {
                 });
             }
             contactfacetednav.contacts.render();
-            jQuery('.contact-entry input').click(function() {
+            jQuery(contactfacetednav.selector).click(function() {
                 var input = jQuery(this);
                 var uid = input.attr('id').split('-')[1];
                 var contact = contactfacetednav.contacts.get(uid);

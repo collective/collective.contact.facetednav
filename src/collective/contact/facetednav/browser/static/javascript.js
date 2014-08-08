@@ -29,7 +29,7 @@ contactfacetednav.init = function() {
                 var input = jQuery(this);
                 var uid = input.attr('id').split('-')[1];
                 var contact = contactfacetednav.contacts.get(uid);
-                var selected = input.attr('checked') == 'checked';
+                var selected = input.prop('checked');
                 contact.setSelected(selected);
                 contact.render();
             });

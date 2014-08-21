@@ -102,9 +102,11 @@ contactfacetednav.Contact = Backbone.Model.extend({
         }
         else if (this.isSelected()) {
             input.prop('checked', true);
+            input.trigger('change');
         }
         else{
             input.prop('checked', false);
+            input.trigger('change');
         }
 
     }

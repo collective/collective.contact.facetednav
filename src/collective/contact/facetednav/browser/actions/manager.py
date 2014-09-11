@@ -14,13 +14,14 @@ def is_available(viewlet):
     if not guarded_hasattr(viewlet, 'render'):
         return False
 
-    try:
+    if hasattr(viewlet, 'available'):
         if callable(viewlet.available):
             available = viewlet.available()
         else:
             available = viewlet.available
+
         return available
-    except AttributeError:
+    else:
         return True
 
 

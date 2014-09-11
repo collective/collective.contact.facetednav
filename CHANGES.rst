@@ -5,6 +5,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Fix conditional viewlet manager to really check that viewlets are available.
+  [cedricmessiant]
+
 - We can create a held_position from the faceted navigation view.
   [thomasdesvenain]
 

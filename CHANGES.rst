@@ -2,8 +2,8 @@ Changelog
 =========
 
 
-1.2 (unreleased)
-----------------
+1.1.1 (2014-09-15)
+------------------
 
 - Fix conditional viewlet manager to really check that viewlets are available.
   [cedricmessiant]

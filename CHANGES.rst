@@ -5,7 +5,10 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use a 'rendercheckboxes' namespace when registering
+  Faceted.Events.AJAX_QUERY_SUCCESS callback, so we can unbind it from an other
+  module.
+  [vincentfretin]
 
 
 1.1.1 (2014-09-15)

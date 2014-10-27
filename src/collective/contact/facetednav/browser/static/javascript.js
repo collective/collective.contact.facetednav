@@ -15,7 +15,8 @@ contactfacetednav.init = function() {
         }
     });
 
-    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
+    // use a namespace here so we can unbind the callback in an other module
+    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS + '.rendercheckboxes', function() {
         jQuery('#contacts-facetednav-batchactions').each(function(){
             if (!Faceted.b_start_changed) {
                 contactfacetednav.contacts = new contactfacetednav.Contacts();
@@ -35,6 +36,8 @@ contactfacetednav.init = function() {
             });
             contactfacetednav.show_messages();
         });
+    });
+    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
         jQuery('#faceted-add a.faceted-add-organization').prepOverlay({
             subtype: 'ajax',
             filter: common_content_filter,

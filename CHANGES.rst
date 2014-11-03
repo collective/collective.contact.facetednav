@@ -5,6 +5,9 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
+- Trigger events when selecting/unselecting all.
+  [cedricmessiant]
+
 - Use a 'rendercheckboxes' namespace when registering
   Faceted.Events.AJAX_QUERY_SUCCESS callback, so we can unbind it from an other
   module.

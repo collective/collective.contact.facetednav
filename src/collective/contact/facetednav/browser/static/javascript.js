@@ -134,11 +134,13 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         this.each(function(contact){
             contact.setSelected(true);
         });
+        this.trigger('select-all');
     },
     unselectAll: function(){
         this.each(function(contact){
             contact.setSelected(false);
         });
+        this.trigger('unselect-all');
     },
     selection: function(){
         return this.filter(function(contact){

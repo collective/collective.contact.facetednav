@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for this package."""
-
+import json
 from zope.interface.declarations import alsoProvides
 from plone import api
 from plone.app.testing.helpers import login
@@ -58,13 +58,13 @@ class TestInstall(IntegrationTestCase):
         directory = self.portal.mydirectory
 
         self.portal.REQUEST.form['type'] = 'organization'
-        json_contacts = eval(directory.unrestrictedTraverse('@@json-contacts')())
+        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
         self.assertEqual(len(json_contacts), 7)
         self.assertTrue(json_contacts[0].has_key('id'))
         self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/armeedeterre')
 
         self.portal.REQUEST.form['type'] = 'held_position'
-        json_contacts = eval(directory.unrestrictedTraverse('@@json-contacts')())
+        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
         self.assertEqual(len(json_contacts), 4)
         self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/degaulle/adt')
 

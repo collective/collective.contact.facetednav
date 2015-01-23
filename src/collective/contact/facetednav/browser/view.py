@@ -52,6 +52,8 @@ class JSONContacts(FacetedQueryHandler):
 
     @json_output
     def __call__(self, *args, **kwargs):
+        self.request.RESPONSE.setHeader('Cache-Control', 'no-cache')
+        self.request.RESPONSE.setHeader('Pragma', 'no-cache')
         self.brains = self.query(**kwargs)
         infos = []
         for brain in self.brains:

@@ -5,6 +5,9 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
+- Force no caching in ajax requests (fix bug with Internet Explorer).
+  [cedricmessiant]
+
 - Trigger events when selecting/unselecting all.
   [cedricmessiant]
 

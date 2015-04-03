@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.2 (unreleased)
+1.1.2 (2015-04-03)
 ------------------
 
 - Force no caching in ajax requests (fix bug with Internet Explorer).

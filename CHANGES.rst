@@ -5,7 +5,8 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix KeyError in preview-heldposition.pt
+  [cedricmessiant]
 
 
 1.1.2 (2015-04-03)

@@ -42,12 +42,12 @@
 
     <span class="contact-phone"
          tal:condition="python:not heldPositionHasPhone and person.phone"
-         tal:attributes="href string:tel:${held_position/phone}"
-         tal:content="held_position/phone">317-456-2564</span>
+         tal:attributes="href string:tel:${context/phone}"
+         tal:content="context/phone">317-456-2564</span>
     <a class="contact-email"
        tal:condition="python:not heldPositionHasEmail and person.email"
-       tal:attributes="href string:mailto:${held_position/email}"
-       tal:content="held_position/email"></a>
+       tal:attributes="href string:mailto:${context/email}"
+       tal:content="context/email"></a>
 
   </div>
 

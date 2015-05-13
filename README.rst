@@ -4,6 +4,8 @@ collective.contact.facetednav
 
 Faceted navigation view for collective.contact.core directory.
 
+For an overview and a demo of `collective.contact.*` suite, see `collective.contact.demo <https://github.com/collective/collective.contact.demo>`__ package.
+
 Read eea.facetednavigation and collective.contact.core documentation
 for more information about those amazing products.
 

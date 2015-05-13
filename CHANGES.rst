@@ -5,6 +5,9 @@ Changelog
 1.1.3 (unreleased)
 ------------------
 
+- Display full title of organizations instead of title on preview-organization.pt
+  [cedricmessiant]
+
 - Fix KeyError in preview-heldposition.pt
   [cedricmessiant]
 

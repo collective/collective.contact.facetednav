@@ -11,7 +11,7 @@
               organization_macro macros/organization | nothing;
               showOrganizationMacro python:organization_macro;">
   <a tal:define="
-      title context/pretty_title_or_id|string:;
+      title context/get_full_title|string:;
       url context/absolute_url|string:#;
       has_logo context/logo|nothing;"
      tal:attributes="href url;

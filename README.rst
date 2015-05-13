@@ -2,9 +2,9 @@
 collective.contact.facetednav
 =============================
 
-Faceted navigation view for collective.contact.core directory.
+This add-on is part of the ``collective.contact.*`` suite. For an overview and a demo of these suite, see `collective.contact.demo <https://github.com/collective/collective.contact.demo>`__.
 
-For an overview and a demo of `collective.contact.*` suite, see `collective.contact.demo <https://github.com/collective/collective.contact.demo>`__ package.
+Faceted navigation view for collective.contact.core directory.
 
 Read eea.facetednavigation and collective.contact.core documentation
 for more information about those amazing products.

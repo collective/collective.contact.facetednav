@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.3 (unreleased)
+1.1.3 (2015-06-02)
 ------------------
 
 - Display full title of organizations instead of title on preview-organization.pt

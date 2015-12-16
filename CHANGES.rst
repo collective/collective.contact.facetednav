@@ -5,7 +5,8 @@ Changelog
 1.1.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Check link integrity in remove selection action.
+  [cedricmessiant]
 
 
 1.1.3 (2015-06-02)

@@ -3,8 +3,6 @@ from zope.i18n import translate
 from Products.Five.browser import BrowserView
 from Products.CMFCore.utils import getToolByName
 from Products.statusmessages.interfaces import IStatusMessage
-from plone.app.linkintegrity.interfaces import ILinkIntegrityInfo
-from plone.app.linkintegrity.exceptions import LinkIntegrityNotificationException
 
 from collective.contact.facetednav.browser.view import json_output
 from collective.contact.facetednav.browser.actions.base import (
@@ -32,38 +30,41 @@ class DeleteSelection(BrowserView):
 
     @json_output
     def delete(self):
+        self.request.response.setHeader('Content-Type', 'text/json')
+        self.request.response.setHeader('Cache-Control', 'no-cache')
+        self.request.response.setHeader('Pragma', 'no-cache')
         uids = self.request['uids']
         ctool = getToolByName(self.context, 'portal_catalog')
         mtool = getToolByName(self.context, 'portal_membership')
         brains = ctool(UID=uids)
         fails = []
         success = 0
-        integrity_info = ILinkIntegrityInfo(self.request)
         for b in brains:
             obj = b.getObject()
-            integrity_info.addDeletedItem(obj)
-            if not mtool.checkPermission('Delete objects', obj):
-                fails.append(translate(_(u"Unauthorized: ${path}",
-                                         mapping={'path': b.getPath()}),
-                                       context=self.request))
+            if not mtool.checkPermission('Delete objects', obj):  #pylint: disable=E1103
+                fails.append(translate(
+                    _(u"Unauthorized: ${path}", mapping={'path': b.getPath()}),
+                    context=self.request))
             else:
-                try:
-                    parent = obj.getParentNode()
-                    parent.manage_delObjects([obj.getId()])
-                except LinkIntegrityNotificationException:
-                    pass
-                finally:
-                    success += 1
+                parent = obj.getParentNode()
+                parent.manage_delObjects([obj.getId()])
+                success += 1
 
-        IStatusMessage(self.request).add(_("msg_objects_deleted",
-                                           default="${num} object(s) deleted",
-                                           mapping={'num': success}))
+        IStatusMessage(self.request).add(
+            _("msg_objects_deleted",
+              default="${num} object(s) deleted",
+              mapping={'num': success}))
+
         if fails:
             IStatusMessage(self.request).add(
-                      _("msg_objects_delete_failed",
-                        default="${num} object(s) were not deleted : ${fails}",
-                        mapping={'num': len(fails), 'fails': ", ".join(fails)}),
-                      'error')
+                _("msg_objects_delete_failed",
+                  default="${num} object(s) were not deleted : ${fails}",
+                  mapping={'num': len(fails), 'fails': ", ".join(fails)}),
+                'error')
+
+        return {
+            'status': 'success',
+        }
 
 
 class DeleteAction(ActionBase):

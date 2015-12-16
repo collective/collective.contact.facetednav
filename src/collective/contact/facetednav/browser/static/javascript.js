@@ -209,9 +209,50 @@ contactfacetednav.delete_selection = function(confirm_msg){
     confirm_msg = confirm_msg.replace('$num', uids.length);
     if(confirm(confirm_msg)){
         var base_url = jQuery('base').attr('href');
-        jQuery.post(base_url + '/delete_selection',
-                    contactfacetednav.serialize_uids(uids),
-                    function(fails){Faceted.Form.do_form_query();}
+        jQuery.post(
+            base_url + '/delete_selection',
+            contactfacetednav.serialize_uids(uids),
+            function(response){
+                // response can be HTML from link integrity page
+                if (response && response.status !== 'success') {
+                    // display link integrity overlay
+                    var divOverlay = $('<div class="overlay overlay-ajax"></div>').appendTo('body');
+                    var divPbAjax = $('<div class="pb-ajax"></div>').appendTo(divOverlay);
+                    var div = $('<div></div>').appendTo(divPbAjax);
+                    var linkIntegrityHTML = $('<div></div>').html(response);
+                    var content = $(linkIntegrityHTML).find('#content');
+                    div.html(content);
+                    var width = document.body.clientWidth * 0.8;
+                    var right = document.body.clientWidth / 2 - width / 2;
+                    divOverlay.css({
+                        display: 'block',
+                        position: 'absolute',
+                        right: right + 'px',
+                        top: '200px',
+                        width: width + 'px',
+                        zIndex: 9999,
+                    });
+                    var form = divOverlay.find('form');
+
+                    // hide delete button as it has no meaning here
+                    form.find('input[name=delete]').hide();
+
+                    var params = form.serialize();
+                    form.find('input').click(function (e) {
+                        form.button = e.target.name;
+                    });
+                    form.submit(function(e) {
+                        e.preventDefault();
+                        params = params + '&' + form.button + '="clicked"';
+                        $.post(form.attr('action'), params, function(result) {
+                            window.location.reload(true);
+                        });
+                    });
+                } else {
+                    // success
+                    Faceted.Form.do_form_query();
+                }
+            }
         );
     }
 };

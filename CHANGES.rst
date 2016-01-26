@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.4 (unreleased)
+1.1.4 (2016-01-26)
 ------------------
 
 - Check link integrity in remove selection action.

@@ -128,7 +128,8 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         });
     },
     url : function() {
-        return 'json-contacts?' + jQuery.param(Faceted.SortedQuery());
+        var baseURL = $('base').attr('href');
+        return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery());
     },
     selectAll: function(){
         this.each(function(contact){

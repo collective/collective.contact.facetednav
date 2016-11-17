@@ -81,7 +81,7 @@ msgstr "Nessun contatto corrisponde a questi criteri."
 #. Default: "${num} object(s) were not deleted : ${fails}"
 #: ../browser/actions/delete.py:60
 msgid "msg_objects_delete_failed"
-msgstr "${num} oggetto/i non è/sono stato/i eliminato/i : $ {fails}"
+msgstr "${num} oggetto/i non è/sono stato/i eliminato/i : ${fails}"
 
 #. Default: "${num} object(s) deleted"
 #: ../browser/actions/delete.py:54

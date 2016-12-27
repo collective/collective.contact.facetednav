@@ -7,6 +7,9 @@ Changelog
 
 - Add translations for de, it, fr and sl
   [fRiSi]
+  
+- Fix base url for json-contacts view's call.
+  [cedricmessiant]
 
 
 1.1.4 (2016-01-26)

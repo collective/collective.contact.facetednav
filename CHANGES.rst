@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.5 (unreleased)
+1.1.5 (2016-12-27)
 ------------------
 
 - Add translations for de, it, fr and sl

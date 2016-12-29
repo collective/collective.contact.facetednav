@@ -5,9 +5,12 @@ Changelog
 1.1.5 (unreleased)
 ------------------
 
+- Fixed js bottleneck on select / unselect all button.
+  [thomasdesvenain]
+
 - Add translations for de, it, fr and sl
   [fRiSi]
-  
+
 - Fix base url for json-contacts view's call.
   [cedricmessiant]
 

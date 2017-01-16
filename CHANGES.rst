@@ -2,11 +2,15 @@ Changelog
 =========
 
 
-1.1.5 (unreleased)
+1.1.6 (2017-01-17)
 ------------------
 
 - Fixed js bottleneck on select / unselect all button.
   [thomasdesvenain]
+
+
+1.1.5 (2016-12-27)
+------------------
 
 - Add translations for de, it, fr and sl
   [fRiSi]

@@ -132,15 +132,21 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery());
     },
     selectAll: function(){
+        this.off('change', this.render);
         this.each(function(contact){
             contact.setSelected(true);
         });
+        this.render();
+        this.on('change', this.render);
         this.trigger('select-all');
     },
     unselectAll: function(){
+        this.off('change', this.render);
         this.each(function(contact){
             contact.setSelected(false);
         });
+        this.render();
+        this.on('change', this.render);
         this.trigger('unselect-all');
     },
     selection: function(){

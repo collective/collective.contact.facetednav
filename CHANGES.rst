@@ -5,7 +5,8 @@ Changelog
 1.1.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed js bottleneck on select / unselect all button.
+  [thomasdesvenain]
 
 NOTE: 1.1.6 is broken
 

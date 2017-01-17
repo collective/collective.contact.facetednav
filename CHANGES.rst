@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.7 (unreleased)
+1.1.7 (2017-01-18)
 ------------------
 
 - Fixed js bottleneck on select / unselect all button.

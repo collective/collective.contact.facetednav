@@ -19,7 +19,7 @@ long_description = (
 
 setup(
     name='collective.contact.facetednav',
-    version='1.1.7',
+    version='1.1.8.dev0',
     description="Faceted navigation view for collective.contact.core directory",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers

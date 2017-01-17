@@ -45,7 +45,7 @@ contactfacetednav.init = function() {
             closeselector: '[name="form.buttons.cancel"]',
             noform: function(el, pbo) {
                 Faceted.Form.do_form_query();
-                return 'close';}
+                return 'close';},
 
         });
         jQuery('#faceted-add a.faceted-add-contact').prepOverlay({
@@ -53,9 +53,9 @@ contactfacetednav.init = function() {
             filter: common_content_filter,
             formselector: '#oform',
             closeselector: '[name="oform.buttons.cancel"]',
-            noform: function() {
+            noform: function(el, pbo) {
                 Faceted.Form.do_form_query();
-                return 'close';}
+                return 'close';},
         });
     });
 };
@@ -76,7 +76,7 @@ contactfacetednav.Contact = Backbone.Model.extend({
     defaults : {
         id : "?????????????????",
         path : "?????????????????",
-        selected : false
+        selected : false,
     },
 
     initialize : function Contact() {
@@ -101,6 +101,7 @@ contactfacetednav.Contact = Backbone.Model.extend({
         var input = jQuery('#contact-' + this.get('id'));
         if (input.length === 0) {
             // Not in current page
+            return;
         }
         else if (this.isSelected()) {
             input.prop('checked', true);
@@ -119,7 +120,7 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
     initialize : function() {
         this.bind('change', this.render);
         this.fetch({
-            success : function(model) {
+            success : function(model, response) {
                 model.each(function(contact) {
                     contact.render();
                 });
@@ -131,20 +132,16 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
         return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery());
     },
     selectAll: function(){
-        this.unbind('change', this.render);
         this.each(function(contact){
             contact.setSelected(true);
         });
-        this.bind('change', this.render);
-        this.trigger('change');
+        this.trigger('select-all');
     },
     unselectAll: function(){
-        this.unbind('change', this.render);
         this.each(function(contact){
             contact.setSelected(false);
         });
-        this.bind('change', this.render);
-        this.trigger('change');
+        this.trigger('unselect-all');
     },
     selection: function(){
         return this.filter(function(contact){
@@ -234,7 +231,7 @@ contactfacetednav.delete_selection = function(confirm_msg){
                         right: right + 'px',
                         top: '200px',
                         width: width + 'px',
-                        zIndex: 9999
+                        zIndex: 9999,
                     });
                     var form = divOverlay.find('form');
 
@@ -282,9 +279,9 @@ jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
                 filter: common_content_filter,
                 formselector: '#delete_confirmation',
                 closeselector: '[name="cancel"]',
-                noform: function() {
+                noform: function(el, pbo) {
                     Faceted.Form.do_form_query();
-                    return 'close';}
+                    return 'close';},
               });
     });
     jQuery('#faceted-results .edit-contact').each(function(){
@@ -294,9 +291,9 @@ jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
                 filter: common_content_filter,
                 formselector: '#form',
                 closeselector: '[name="form.button.cancel"]',
-                noform: function() {
+                noform: function(el, pbo) {
                     Faceted.Form.do_form_query();
-                    return 'close';}
+                    return 'close';},
               });
     });
 });

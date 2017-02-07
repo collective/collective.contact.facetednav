@@ -2,5 +2,6 @@
 <object name="portal_javascripts" meta_type="JavaScripts Registry">
  <javascript authenticated="False" bundle="jquery" cacheable="True"
     compression="none" conditionalcomment="" cookable="True" enabled="True"
-    expression="" id="++resource++collective.contact.facetednav/javascript.js" inline="False"/>
+    insert-after="faceted_edit.js" expression="" 
+    id="++resource++collective.contact.facetednav/javascript.js" inline="False"/>
 </object>

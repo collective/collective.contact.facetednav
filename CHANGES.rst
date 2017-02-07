@@ -5,7 +5,8 @@ Changelog
 1.1.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Ordered javascript. Insert js of this package after js of eea.facetednavigation.
+  [bsuttor]
 
 
 1.1.7 (2017-01-18)

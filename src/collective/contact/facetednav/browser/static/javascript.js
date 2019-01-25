@@ -159,8 +159,11 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
             }
         });
     },
-    url : function() {
-        var baseURL = $('base').attr('href');
+    url: function () {
+        var baseURL = $('body').data('baseUrl') // plone 5
+        if (!baseURL) {
+            baseURL = $('base').attr('href'); // plone 4
+        }
         return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery());
     },
     selectAll: function(){
@@ -246,10 +249,10 @@ contactfacetednav.serialize_pathes = function(pathes){
 contactfacetednav.delete_selection = function(confirm_msg){
     var uids = contactfacetednav.contacts.selection_uids();
     confirm_msg = confirm_msg.replace('$num', uids.length);
-    if(confirm(confirm_msg)){
-        var base_url = jQuery('base').attr('href');
+    if (confirm(confirm_msg)) {
+        var base_url = jQuery('base').attr('href') || $('body').data('baseUrl');
         jQuery.post(
-            base_url + '/delete_selection',
+                base_url + '/delete_selection',
             contactfacetednav.serialize_uids(uids),
             function(response){
                 // response can be HTML from link integrity page

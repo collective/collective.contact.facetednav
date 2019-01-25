@@ -38,4 +38,12 @@
       handler=".upgrades.v4"
       profile="collective.contact.facetednav:default" />
 
+  <genericsetup:upgradeStep
+      title="Upgrade from 4 to 5"
+      description="Refresh js et css"
+      source="4"
+      destination="5"
+      handler=".upgrades.v5"
+      profile="collective.contact.facetednav:default" />
+
 </configure>

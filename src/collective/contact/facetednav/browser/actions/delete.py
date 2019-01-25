@@ -1,3 +1,5 @@
+from plone import api
+
 from zope.i18n import translate
 
 from Products.Five.browser import BrowserView
@@ -73,6 +75,10 @@ class DeleteAction(ActionBase):
     name = 'delete-contact'
     icon = 'delete_icon.png'
     title = _(u"Delete this contact")
+
+    @property
+    def icon(self):
+        return api.portal.get().absolute_url() + "/++resource++collective.contact.core/delete_icon.png"
 
     def url(self):
         return "%s/delete_confirmation" % self.context.absolute_url()

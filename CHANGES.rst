@@ -5,6 +5,9 @@ Changelog
 1.1.8 (unreleased)
 ------------------
 
+- Plone 5 compatible.
+  [thomasdesvenain]
+
 - Ordered javascript. Insert js of this package after js of eea.facetednavigation.
   [bsuttor]
 

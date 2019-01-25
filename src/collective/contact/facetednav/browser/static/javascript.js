@@ -1,9 +1,9 @@
 var contactfacetednav = {};
-
 contactfacetednav.selectionchange = jQuery.Event('selectionchange');
 contactfacetednav.selector = '.contact-entry .contact-selection input';
+contactfacetednav.common_content_filter = '#content>*:not(div.configlet),dl.portalMessage.error,dl.portalMessage.warning,dl.portalMessage.info';
 
-contactfacetednav.init = function() {
+contactfacetednav.init = function () {
     contactfacetednav.status_messages = null;
     Backbone.emulateHTTP = true;
     Backbone.emulateJSON = true;
@@ -37,35 +37,67 @@ contactfacetednav.init = function() {
             contactfacetednav.show_messages();
         });
     });
-    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function() {
+    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function () {
         jQuery('#faceted-add a.faceted-add-organization').prepOverlay({
             subtype: 'ajax',
-            filter: common_content_filter,
+            filter: contactfacetednav.common_content_filter,
             formselector: '#form',
             closeselector: '[name="form.buttons.cancel"]',
-            noform: function(el, pbo) {
+            noform: function (el, pbo) {
                 Faceted.Form.do_form_query();
-                return 'close';},
+                return 'close';
+            },
 
         });
         jQuery('#faceted-add a.faceted-add-contact').prepOverlay({
             subtype: 'ajax',
-            filter: common_content_filter,
+            filter: contactfacetednav.common_content_filter,
             formselector: '#oform',
             closeselector: '[name="oform.buttons.cancel"]',
-            noform: function(el, pbo) {
+            noform: function (el, pbo) {
                 Faceted.Form.do_form_query();
-                return 'close';},
+                return 'close';
+            },
         });
     });
+
+    jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function () {
+        jQuery('#faceted-results .delete-contact').each(function () {
+            var link = jQuery(this);
+            link.prepOverlay({
+                subtype: 'ajax',
+                filter: contactfacetednav.common_content_filter,
+                formselector: '#delete_confirmation',
+                closeselector: '[name="cancel"]',
+                noform: function (el, pbo) {
+                    Faceted.Form.do_form_query();
+                    return 'close';
+                },
+            });
+        });
+        jQuery('#faceted-results .edit-contact').each(function () {
+            var link = jQuery(this);
+            link.prepOverlay({
+                subtype: 'ajax',
+                filter: contactfacetednav.common_content_filter,
+                formselector: '#form',
+                closeselector: '[name="form.button.cancel"]',
+                noform: function (el, pbo) {
+                    Faceted.Form.do_form_query();
+                    return 'close';
+                },
+            });
+        });
+    });
+
 };
 
-contactfacetednav.store_overlay_messages = function(el){
+contactfacetednav.store_overlay_messages = function (el) {
     contactfacetednav.status_messages = jQuery(el).find('.portalMessage');
 };
 
-contactfacetednav.show_messages = function(){
-    if(contactfacetednav.status_messages !== null){
+contactfacetednav.show_messages = function () {
+    if (contactfacetednav.status_messages !== null) {
         jQuery('#contacts-facetednav-batchactions').prepend(contactfacetednav.status_messages);
         contactfacetednav.status_messages = null;
     }
@@ -264,42 +296,15 @@ contactfacetednav.delete_selection = function(confirm_msg){
     }
 };
 
-contactfacetednav.excel_export = function(){
+contactfacetednav.excel_export = function () {
     var uids = contactfacetednav.contacts.selection_uids();
     var url = portal_url + '/@@collective.excelexport?excelexport.policy=excelexport.search';
     var form = jQuery('<form action="' + url + '" method="post"></form>');
 
-    for(var num in uids){
+    for (var num in uids) {
         form.append('<input type="hidden" name="UID:list" value="' + uids[num] + '" />');
     }
     jQuery('body').append(form);
     form.submit();
     form.remove();
 };
-
-jQuery(Faceted.Events).bind(Faceted.Events.AJAX_QUERY_SUCCESS, function(){
-    jQuery('#faceted-results .delete-contact').each(function(){
-        var link = jQuery(this);
-        link.prepOverlay({
-                subtype: 'ajax',
-                filter: common_content_filter,
-                formselector: '#delete_confirmation',
-                closeselector: '[name="cancel"]',
-                noform: function(el, pbo) {
-                    Faceted.Form.do_form_query();
-                    return 'close';},
-              });
-    });
-    jQuery('#faceted-results .edit-contact').each(function(){
-        var link = jQuery(this);
-        link.prepOverlay({
-                subtype: 'ajax',
-                filter: common_content_filter,
-                formselector: '#form',
-                closeselector: '[name="form.button.cancel"]',
-                noform: function(el, pbo) {
-                    Faceted.Form.do_form_query();
-                    return 'close';},
-              });
-    });
-});

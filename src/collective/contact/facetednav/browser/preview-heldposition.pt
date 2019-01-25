@@ -4,8 +4,7 @@
   i18n:domain="collective.contact.facetednav"
   tal:omit-tag=""
   tal:define="portal_type context/portal_type;
-              useViewTypes context/portal_properties/site_properties/typesUseViewActionInListings;
-              useView python:portal_type in useViewTypes;
+              useView view/use_view;
               macros nocall:context/@@contact-macros | nothing;
               held_position_macro macros/held_position | nothing;
               showHeldPositionMacro python:held_position_macro;

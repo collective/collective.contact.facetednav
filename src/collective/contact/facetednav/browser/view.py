@@ -1,15 +1,24 @@
 from json.encoder import JSONEncoder
 
+from Products.CMFPlone.utils import safe_hasattr
 from Products.Five import BrowserView
 
 from eea.facetednavigation.browser.app.query import FacetedQueryHandler
 
 from collective.contact.facetednav.interfaces import IActionsEnabled
+from plone import api
 
 
 class PreviewItem(BrowserView):
-    # ????
-    pass
+    def use_view(self):
+        ptype = self.context.portal_type
+        proptools = api.portal.get_tool('portal_properties')
+        if safe_hasattr(proptools, 'site_properties') \
+                and safe_hasattr(proptools.site_properties, 'typesUseViewActionInListings'):
+            return ptype in proptools.site_properties.typesUseViewActionInListings
+        else:
+            return ptype in api.portal.get_registry_record('plone.types_use_view_action_in_listings')
+
 
 ACTIONS_ENABLED_KEY = 'collective.contact.facetednav.actions_enabled'
 

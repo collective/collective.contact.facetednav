@@ -32,10 +32,21 @@ Installation
 * Add collective.contact.facetednav to your eggs.
 * Add collective.contact.facetednav to your zcml. #It is not auto included#.
 * Re-run buildout.
-* Install the product in your plone site.
+* Install the product in your plone site. It installs eea.facetednavigation if it is not already installed.
 
 If you don't want all default features, include only minimal.zcml file and
 the files you want in configure.zcml.
+
+
+IMPORTANT : Compatibility with collective.js.jqueryui
+-----------------------------------------------------
+
+collective.js.jqueryui is a dependency of eea.
+For now, collective.js.jqueryui is not compatible with plone.formwidget.autocomplete,
+which is a dependency of collective.contact.core.
+You **must** disable jqueryui autocomplete feature if you want contact widget to work.
+You can disable the plugin in the JQuery UI configurations settings of site control panel.
+
 
 Tests
 =====

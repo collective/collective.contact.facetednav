@@ -68,7 +68,7 @@ contactfacetednav.init = function () {
                 subtype: 'ajax',
                 filter: contactfacetednav.common_content_filter,
                 formselector: '#delete_confirmation',
-                closeselector: '[name="cancel"]',
+                closeselector: '[name="cancel"],[name="form.buttons.Cancel"]',
                 noform: function (el, pbo) {
                     Faceted.Form.do_form_query();
                     return 'close';
@@ -81,7 +81,7 @@ contactfacetednav.init = function () {
                 subtype: 'ajax',
                 filter: contactfacetednav.common_content_filter,
                 formselector: '#form',
-                closeselector: '[name="form.button.cancel"]',
+                closeselector: '[name="form.buttons.cancel"]',
                 noform: function (el, pbo) {
                     Faceted.Form.do_form_query();
                     return 'close';

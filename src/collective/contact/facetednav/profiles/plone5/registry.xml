@@ -1,0 +1,9 @@
+<registry>
+  <records prefix="plone.resources/collective.contact.facetednav"
+           interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+    <value key="js">++resource++collective.contact.facetednav/javascript.js</value>
+    <value key="css">
+      <element>++resource++collective.contact.facetednav/style.css</element>
+    </value>
+  </records>
+</registry>

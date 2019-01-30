@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 def isNotCurrentProfile(context):
     return context.readDataFile("collective.contactfacetednav_marker.txt") is None
 

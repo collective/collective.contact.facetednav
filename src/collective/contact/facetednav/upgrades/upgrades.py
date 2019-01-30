@@ -24,6 +24,9 @@ def v4(context):
 
 def v5(context):
     tool = IUpgradeTool(context)
+    tool.runImportStep('collective.contact.core', 'cssregistry')
+    tool.runImportStep('collective.contact.core', 'jsregistry')
+    tool.runImportStep('collective.contact.core', 'plone.app.registry')
     tool.refreshResources()
     if cookWhenChangingSettings is not None:
         cookWhenChangingSettings(context)

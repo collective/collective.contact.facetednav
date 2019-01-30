@@ -6,7 +6,6 @@ from zope import component
 from zope.intid.interfaces import IIntIds
 from zope.lifecycleevent import modified
 
-
 def isNotCurrentProfile(context):
     return context.readDataFile("collective.contactfacetednav_marker.txt") is None
 

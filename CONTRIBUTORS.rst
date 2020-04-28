@@ -1,2 +1,3 @@
 - Cédric Messiant, cedricmessiant@ecreall.com
 - Thomas Desvenain, thomas.desvenain@gmail.com
+- Leonardo Caballero, leonardocaballero@gmail.com

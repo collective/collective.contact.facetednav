@@ -37,6 +37,23 @@ Installation
 If you don't want all default features, include only minimal.zcml file and
 the files you want in configure.zcml.
 
+
+Translations
+============
+
+This product has been translated into
+
+- German.
+
+- Spanish.
+
+- French.
+
+- Italian.
+
+- Slovenian.
+
+
 Tests
 =====
 

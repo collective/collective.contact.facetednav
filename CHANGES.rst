@@ -5,6 +5,8 @@ Changelog
 1.1.8 (unreleased)
 ------------------
 
+- Add Spanish translation
+  [macagua]
 - Ordered javascript. Insert js of this package after js of eea.facetednavigation.
   [bsuttor]
 

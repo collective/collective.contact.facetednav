@@ -3,3 +3,4 @@ recursive-include docs *
 recursive-include buildout.d *
 include *
 global-exclude *pyc
+prune .tx

@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1.8 (unreleased)
+1.1.8 (2021-04-20)
 ------------------
 
 - Add Transifex.net service integration to manage the translation process.

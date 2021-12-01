@@ -10,6 +10,6 @@ def v3(context):
     tool.runImportStep('collective.contact.facetednav', 'actions')
     tool.runImportStep('collective.contact.facetednav', 'jsregistry')
 
-def v4(context):
+def refresh_resources(context):
     tool = IUpgradeTool(context)
     tool.refreshResources()

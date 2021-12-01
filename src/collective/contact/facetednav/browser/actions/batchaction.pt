@@ -9,7 +9,7 @@
            class="context"
            tal:attributes="name view/name;
                            id string:contact-facetednav-action-${view/name};
-                           class python:(view.klass or default) + (view.multiple_selection and ' multiple-selection' or '');
+                           class python:(view.klass or default) + (view.multiple_selection and ' multiple-selection' or '') + (view.global_selection and ' global-selection' or '');
                            value view/label;
                            onclick view/onclick|nothing;
                            "

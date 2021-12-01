@@ -72,6 +72,16 @@ class TestInstall(IntegrationTestCase):
         self.assertEqual(len(json_contacts), 4)
         self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/degaulle/adt')
 
+    def test_json_contacts_select_all_max(self):
+        login(self.portal, TEST_USER_NAME)
+        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
+        directory = self.portal.mydirectory
+
+        self.portal.REQUEST.form['type'] = 'organization'
+        self.portal.REQUEST.form['cfn_select_all_max'] = 5
+        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
+        self.assertEqual(len(json_contacts), 6)
+
     def test_delete_action(self):
         login(self.portal, TEST_USER_NAME)
         directory = self.portal.mydirectory

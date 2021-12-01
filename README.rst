@@ -20,10 +20,15 @@ You can add new actions, adding viewlets to collective.contact.facetednav.batcha
 viewlet manager (collective.contact.facetednav.batchactions.manager.IBatchActions interface)
 and to collective.contact.facetednav.actions manager (collective.contact.facetednav.batchactions.manager.IActions interface)
 You have to write the javascript code to handle it.
-See collective.contact.facetednav.browser.actions.base abstract classes.
+See collective.contact.facetednav.browser.actions.base abstract classes for more documentation.
 
 Some api will help you to handle the list of selected contents uids and pathes.
 Use delete action as a model.
+
+You can set the maximum value of selectable items.
+Set for instance in your custom javascript:
+
+    contactfacetednav.SELECT_ALL_MAX = 1000;
 
 
 Installation

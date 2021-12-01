@@ -46,9 +46,15 @@ class JSONContacts(FacetedQueryHandler):
         kwargs.pop('sort', None)
         kwargs.pop('batch', None)
         kwargs.pop('b_start', None)
+        select_all_max = kwargs.pop('cfn_select_all_max', None)
+
         faceted_query_view = self.context.unrestrictedTraverse('@@faceted_query')
         brains = faceted_query_view.query(batch=False, sort=False, **kwargs)
-        return brains
+        if select_all_max:
+            # get one more so we can know in js if max has been passed
+            return brains[:int(select_all_max) + 1]
+        else:
+            return brains
 
     @json_output
     def __call__(self, *args, **kwargs):

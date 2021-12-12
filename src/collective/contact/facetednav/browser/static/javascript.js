@@ -1,5 +1,7 @@
 var contactfacetednav = {};
 
+contactfacetednav.SELECT_ALL_MAX = 0;
+
 contactfacetednav.selectionchange = jQuery.Event('selectionchange');
 contactfacetednav.selector = '.contact-entry .contact-selection input';
 
@@ -25,7 +27,9 @@ contactfacetednav.init = function() {
                     contact.render();
                 });
             }
-            contactfacetednav.contacts.render();
+            window.setTimeout(function() {
+                contactfacetednav.contacts.render();
+            }, 0);
             jQuery(contactfacetednav.selector).click(function() {
                 var input = jQuery(this);
                 var uid = input.attr('id').split('-')[1];
@@ -129,7 +133,8 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
     },
     url : function() {
         var baseURL = $('base').attr('href');
-        return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery());
+        var selectAllMaxParam = contactfacetednav.SELECT_ALL_MAX ? '&cfn_select_all_max=' + contactfacetednav.SELECT_ALL_MAX : ''
+        return baseURL + '/json-contacts?' + jQuery.param(Faceted.SortedQuery()) + selectAllMaxParam;
     },
     selectAll: function(){
         this.off('change', this.render);
@@ -176,23 +181,41 @@ contactfacetednav.Contacts = Backbone.Collection.extend({
     render: function(){
         var selection_length = this.selection().length;
         var select_all_button = jQuery('#contacts-selectall');
+
         if(selection_length===0){
             jQuery('.contacts-buttons input').attr('disabled', true);
+            jQuery('.contacts-buttons input.global-selection').attr('disabled', false);
             select_all_button.attr('title', select_all_button.attr('data-select-all-msg'));
             select_all_button.attr('value', select_all_button.attr('data-select-all-msg'));
+
+            if (this.resultTooLargeForSelectAll()) {
+                var too_large_msg = select_all_button.attr('data-select-all-too-large-msg') + ' (> ' + contactfacetednav.SELECT_ALL_MAX + ')';
+                select_all_button.attr('title', too_large_msg);
+                select_all_button.attr('disabled', true);
+            } else {
+                select_all_button.attr('disabled', false);
+            }
         }
         else if(selection_length===1){
             jQuery('.contacts-buttons input').attr('disabled', false);
             jQuery('.contacts-buttons input.multiple-selection').attr('disabled', true);
+            jQuery('.contacts-buttons input.global-selection').attr('disabled', true);
+            select_all_button.attr('disabled', false);
             select_all_button.attr('title', select_all_button.attr('data-unselect-all-msg'));
             select_all_button.attr('value', select_all_button.attr('data-unselect-all-msg'));
         }
         else{
             jQuery('.contacts-buttons input').attr('disabled', false);
+            jQuery('.contacts-buttons input.global-selection').attr('disabled', true);
+            select_all_button.attr('disabled', false);
             select_all_button.attr('title', select_all_button.attr('data-unselect-all-msg'));
             select_all_button.attr('value', select_all_button.attr('data-unselect-all-msg'));
         }
         jQuery('#contacts-selection-num .num').text(selection_length);
+
+    },
+    resultTooLargeForSelectAll: function() {
+        return !!contactfacetednav.SELECT_ALL_MAX && this.length > contactfacetednav.SELECT_ALL_MAX;
     }
 });
 

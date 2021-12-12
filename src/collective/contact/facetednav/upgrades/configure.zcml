@@ -32,10 +32,18 @@
 
   <genericsetup:upgradeStep
       title="Upgrade from 3 to 4"
-      description="Refresh js et css"
+      description="Refresh js and css"
       source="3"
       destination="4"
-      handler=".upgrades.v4"
+      handler=".upgrades.refresh_resources"
+      profile="collective.contact.facetednav:default" />
+
+  <genericsetup:upgradeStep
+      title="Upgrade from 4 to 5"
+      description="Refresh js and css"
+      source="4"
+      destination="5"
+      handler=".upgrades.refresh_resources"
       profile="collective.contact.facetednav:default" />
 
 </configure>

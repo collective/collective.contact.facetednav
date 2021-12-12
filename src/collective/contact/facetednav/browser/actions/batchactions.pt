@@ -17,6 +17,7 @@
            class="standalone"
            i18n:attributes="data-select-all-msg; data-unselect-all-msg"
            data-select-all-msg="Select all"
+           data-select-all-too-large-msg="Results is too large for mass selection"
            data-unselect-all-msg="Unselect all"
             />
     <span class="contacts-buttons">

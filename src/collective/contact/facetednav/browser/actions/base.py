@@ -10,6 +10,8 @@ class BatchActionBase(ViewletBase):
     weight = 1000 # info for actions order
     # if True the action is activated when several elements are selected
     multiple_selection = False
+    # if True the action is for all elements found, regardless of selected elements
+    global_selection = False
 
     def available(self):
         return True

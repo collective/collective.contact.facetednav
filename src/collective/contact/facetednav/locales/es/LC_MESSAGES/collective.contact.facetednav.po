@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.contact.facetednav\n"
-"POT-Creation-Date: 2014-03-24 10:29+0000\n"
+"POT-Creation-Date: 2021-12-12 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,11 +30,11 @@ msgstr "Las acciones de los contactos están desactivadas"
 msgid "Contacts actions enabled"
 msgstr "Las acciones de los contactos están activadas"
 
-#: ../browser/actions/delete.py:17
+#: ../browser/actions/delete.py:15
 msgid "Delete selected contacts"
 msgstr "Eliminar los contactos seleccionados"
 
-#: ../browser/actions/delete.py:72
+#: ../browser/actions/delete.py:75
 msgid "Delete this contact"
 msgstr "Eliminar este contacto"
 
@@ -50,6 +50,14 @@ msgstr "Activar las acciones"
 msgid "Excel export"
 msgstr "Exportar a excel"
 
+#: ../minimal.zcml:29
+msgid "Installs the collective.contact.facetednav add-on."
+msgstr ""
+
+#: ../upgrades/configure.zcml:15
+msgid "Migration profile for collective.contact.facetednav to 2"
+msgstr ""
+
 #: ../vocabularies.py:19
 msgid "Organizations"
 msgstr "Organizaciones"
@@ -58,20 +66,36 @@ msgstr "Organizaciones"
 msgid "Persons"
 msgstr "Personas"
 
-#: ../browser/actions/batchactions.pt:14
+#: ../browser/actions/batchactions.pt:15
+msgid "Results is too large for mass selection"
+msgstr ""
+
+#: ../browser/actions/batchactions.pt:15
 msgid "Select all"
 msgstr "Seleccionar todos"
 
-#: ../browser/actions/delete.py:44
+#: ../testing.zcml:16
+msgid "Steps to ease tests of collective.contact.facetednav"
+msgstr ""
+
+#: ../browser/actions/delete.py:46
 msgid "Unauthorized: ${path}"
 msgstr "No autorizado : ${path}"
 
-#: ../browser/actions/batchactions.pt:14
+#: ../browser/actions/batchactions.pt:15
 msgid "Unselect all"
 msgstr "Deseleccionar todos"
 
+#: ../minimal.zcml:29
+msgid "collective.contact.facetednav"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "collective.contact.facetednav tests"
+msgstr ""
+
 #. Default: "Are you sure you want to remove $num selected content(s) ?"
-#: ../browser/actions/delete.py:24
+#: ../browser/actions/delete.py:23
 msgid "confirm_delete_selection"
 msgstr "¿Esta seguro que quiere eliminar los $num contactos seleccionados?"
 
@@ -81,16 +105,16 @@ msgid "help_no_result"
 msgstr "No hay contacto que coincida con el criterio."
 
 #. Default: "${num} object(s) were not deleted : ${fails}"
-#: ../browser/actions/delete.py:61
+#: ../browser/actions/delete.py:60
 msgid "msg_objects_delete_failed"
 msgstr "${num} contacto(s) no fue/no fueron eliminado(s) : ${fails}"
 
 #. Default: "${num} object(s) deleted"
-#: ../browser/actions/delete.py:56
+#: ../browser/actions/delete.py:54
 msgid "msg_objects_deleted"
 msgstr "${num} contacto(s) eliminado(s)"
 
 #. Default: "Selected contacts: ${num}"
-#: ../browser/actions/batchactions.pt:27
+#: ../browser/actions/batchactions.pt:29
 msgid "selected_contacts_num"
 msgstr "${num} contactos seleccionados"

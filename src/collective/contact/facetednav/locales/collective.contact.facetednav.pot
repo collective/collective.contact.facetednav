@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2016-09-29 10:38+0000\n"
+"POT-Creation-Date: 2021-12-12 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -49,6 +49,14 @@ msgstr ""
 msgid "Excel export"
 msgstr ""
 
+#: ../minimal.zcml:29
+msgid "Installs the collective.contact.facetednav add-on."
+msgstr ""
+
+#: ../upgrades/configure.zcml:15
+msgid "Migration profile for collective.contact.facetednav to 2"
+msgstr ""
+
 #: ../vocabularies.py:19
 msgid "Organizations"
 msgstr ""
@@ -58,7 +66,15 @@ msgid "Persons"
 msgstr ""
 
 #: ../browser/actions/batchactions.pt:15
+msgid "Results is too large for mass selection"
+msgstr ""
+
+#: ../browser/actions/batchactions.pt:15
 msgid "Select all"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "Steps to ease tests of collective.contact.facetednav"
 msgstr ""
 
 #: ../browser/actions/delete.py:46
@@ -67,6 +83,14 @@ msgstr ""
 
 #: ../browser/actions/batchactions.pt:15
 msgid "Unselect all"
+msgstr ""
+
+#: ../minimal.zcml:29
+msgid "collective.contact.facetednav"
+msgstr ""
+
+#: ../testing.zcml:16
+msgid "collective.contact.facetednav tests"
 msgstr ""
 
 #. Default: "Are you sure you want to remove $num selected content(s) ?"
@@ -90,7 +114,6 @@ msgid "msg_objects_deleted"
 msgstr ""
 
 #. Default: "Selected contacts: ${num}"
-#: ../browser/actions/batchactions.pt:28
+#: ../browser/actions/batchactions.pt:29
 msgid "selected_contacts_num"
 msgstr ""
-

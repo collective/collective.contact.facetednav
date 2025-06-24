@@ -37,7 +37,7 @@ class TestInstall(IntegrationTestCase):
     def test_browserlayer(self):
         """Test that ICollectiveContactFacetednavLayer is registered."""
         from plone.browserlayer import utils
-        self.failUnless(ICollectiveContactFacetednavLayer in utils.registered_layers())
+        self.assertTrue(ICollectiveContactFacetednavLayer in utils.registered_layers())
 
     def test_subtyper(self):
         login(self.portal, TEST_USER_NAME)
@@ -64,7 +64,7 @@ class TestInstall(IntegrationTestCase):
         self.portal.REQUEST.form['type'] = 'organization'
         json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
         self.assertEqual(len(json_contacts), 7)
-        self.assertTrue(json_contacts[0].has_key('id'))
+        self.assertTrue('id' in json_contacts[0])
         self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/armeedeterre')
 
         self.portal.REQUEST.form['type'] = 'held_position'

@@ -41,7 +41,7 @@ class JSONContacts(FacetedQueryHandler):
             kwargs.update(self.request.form)
 
         kwargs = dict((key.replace('[]', ''), val)
-                      for key, val in kwargs.items())
+                      for key, val in list(kwargs.items()))
 
         kwargs.pop('sort', None)
         kwargs.pop('batch', None)

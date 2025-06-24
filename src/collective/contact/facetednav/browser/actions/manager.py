@@ -1,6 +1,6 @@
 """Viewlet managers
 """
-from zope.interface import implements
+from zope.interface import implementer
 from zope.viewlet.interfaces import IViewletManager
 from zope.viewlet.manager import WeightOrderedViewletManager
 from AccessControl.ZopeGuards import guarded_hasattr
@@ -43,18 +43,18 @@ class IBatchActions(IViewletManager):
     pass
 
 
+@implementer(IBatchActions)
 class BatchActionsViewletManager(ConditionalViewletManager):
     """Batch actions viewlet manager
     """
-    implements(IBatchActions)
 
 
 class IActions(IViewletManager):
     pass
 
 
+@implementer(IActions)
 class ActionsViewletManager(ConditionalViewletManager):
-    implements(IActions)
 
     def available(self):
         return self.request[ACTIONS_ENABLED_KEY]

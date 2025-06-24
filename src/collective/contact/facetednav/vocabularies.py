@@ -1,18 +1,17 @@
 """ Types vocabularies
 """
-from zope.interface import implements
+from zope.interface import implementer
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
-
-from eea.faceted.vocabularies.utils import IVocabularyFactory
 
 from collective.contact.facetednav import _
 
 
+@implementer(IVocabularyFactory)
 class ContactPortalTypesVocabulary(object):
     """Vocabulary factory for contact portal types.
     """
-    implements(IVocabularyFactory)
 
     def __call__(self, context):
         context = getattr(context, 'context', context)

@@ -13,7 +13,7 @@ from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.testing import z2
 
-import unittest2 as unittest
+import unittest
 
 from zope.interface import alsoProvides
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable

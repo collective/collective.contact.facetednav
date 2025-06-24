@@ -26,9 +26,9 @@ setup(
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: 6.1",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.13",
     ],
     keywords='contact,dexterity,faceted,search',
     author='Cédric Messiant',
@@ -41,10 +41,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        'collective.contact.core > 1.0',
+        'collective.contact.core',
         'collective.js.backbone',
-        'ecreall.helpers.upgrade',
-        'eea.facetednavigation >= 5.8',
+        'eea.facetednavigation',
         'plone.api',
         'setuptools',
     ],
@@ -52,7 +51,6 @@ setup(
         'test': [
             'ecreall.helpers.testing',
             'plone.app.testing',
-            'unittest2',
         ],
     },
     entry_points="""

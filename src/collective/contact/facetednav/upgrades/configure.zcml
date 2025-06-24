@@ -3,47 +3,4 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.contact.facetednav">
 
-  <include package="ecreall.helpers.upgrade" />
-  <include package="collective.js.backbone" />
-
-  <genericsetup:registerProfile
-      name="v2"
-      title="Migration profile for collective.contact.facetednav to 2"
-      directory="profiles/v2"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
-      />
-
-  <genericsetup:upgradeStep
-      title="Upgrade from 1 to 2"
-      description="Add cssregistry for style.css"
-      source="1"
-      destination="2"
-      handler=".upgrades.v2"
-      profile="collective.contact.facetednav:default" />
-
-  <genericsetup:upgradeStep
-      title="Upgrade from 2 to 3"
-      description="Add action and javascript for contact selection"
-      source="2"
-      destination="3"
-      handler=".upgrades.v3"
-      profile="collective.contact.facetednav:default" />
-
-  <genericsetup:upgradeStep
-      title="Upgrade from 3 to 4"
-      description="Refresh js and css"
-      source="3"
-      destination="4"
-      handler=".upgrades.refresh_resources"
-      profile="collective.contact.facetednav:default" />
-
-  <genericsetup:upgradeStep
-      title="Upgrade from 4 to 5"
-      description="Refresh js and css"
-      source="4"
-      destination="5"
-      handler=".upgrades.refresh_resources"
-      profile="collective.contact.facetednav:default" />
-
 </configure>

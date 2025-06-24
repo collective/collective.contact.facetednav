@@ -1,6 +1,6 @@
 """ Subtyping support
 """
-from zope.interface import implements
+from zope.interface import implementer
 from zope.interface import alsoProvides, noLongerProvides
 from zope.publisher.interfaces import NotFound
 
@@ -12,11 +12,11 @@ from collective.contact.facetednav.interfaces import IActionsEnabled
 from collective.contact.facetednav import _
 
 
+@implementer(IContactFacetedSubtyper)
 class ContactFacetedPublicSubtyper(BrowserView):
     """ Public support for subtyping objects
         view for non IPossibleFacetedNavigable objects
     """
-    implements(IContactFacetedSubtyper)
 
     def _redirect(self, msg=''):
         """ Redirect

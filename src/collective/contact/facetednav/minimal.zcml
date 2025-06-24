@@ -13,9 +13,7 @@
     <include package="plone.api" />
     <include package="plone.behavior" file="meta.zcml" />
     <include package="collective.contact.core" />
-    <exclude package="eea.facetednavigation" />
-    <include package="eea.facetednavigation" file="meta.zcml" />
-    <include package="eea.facetednavigation" file="minimal.zcml" />
+    <include package="eea.facetednavigation" />
 
     <include package=".browser" />
     <include package=".upgrades" />

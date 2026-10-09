@@ -7,4 +7,5 @@ def isNotCurrentProfile(context):
 
 def post_install(context):
     """Post install script"""
-    if isNotCurrentProfile(context): return
+    if isNotCurrentProfile(context):
+        return

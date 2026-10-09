@@ -1,11 +1,10 @@
 """ Types vocabularies
 """
+from collective.contact.facetednav import _
 from zope.interface import implementer
 from zope.schema.interfaces import IVocabularyFactory
-from zope.schema.vocabulary import SimpleVocabulary
 from zope.schema.vocabulary import SimpleTerm
-
-from collective.contact.facetednav import _
+from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IVocabularyFactory)
@@ -20,5 +19,6 @@ class ContactPortalTypesVocabulary(object):
                  (_(u"Persons"), 'person')]
         items = [SimpleTerm(i[1], i[1], i[0]) for i in items]
         return SimpleVocabulary(items)
+
 
 ContactPortalTypesVocabularyFactory = ContactPortalTypesVocabulary()

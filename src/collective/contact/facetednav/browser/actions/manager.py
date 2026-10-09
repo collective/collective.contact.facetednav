@@ -1,11 +1,10 @@
 """Viewlet managers
 """
+from AccessControl.ZopeGuards import guarded_hasattr
+from collective.contact.facetednav.browser.view import ACTIONS_ENABLED_KEY
 from zope.interface import implementer
 from zope.viewlet.interfaces import IViewletManager
 from zope.viewlet.manager import WeightOrderedViewletManager
-from AccessControl.ZopeGuards import guarded_hasattr
-
-from collective.contact.facetednav.browser.view import ACTIONS_ENABLED_KEY
 
 
 def is_available(viewlet):

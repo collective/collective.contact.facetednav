@@ -1,15 +1,14 @@
 """ Subtyping support
 """
-from zope.interface import implementer
-from zope.interface import alsoProvides, noLongerProvides
-from zope.publisher.interfaces import NotFound
-
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.Five.browser import BrowserView
-
+from collective.contact.facetednav import _
 from collective.contact.facetednav.browser.interfaces import IContactFacetedSubtyper
 from collective.contact.facetednav.interfaces import IActionsEnabled
-from collective.contact.facetednav import _
+from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from zope.interface import alsoProvides
+from zope.interface import implementer
+from zope.interface import noLongerProvides
+from zope.publisher.interfaces import NotFound
 
 
 @implementer(IContactFacetedSubtyper)

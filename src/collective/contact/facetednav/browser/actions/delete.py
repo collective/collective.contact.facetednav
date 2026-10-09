@@ -1,13 +1,11 @@
-from zope.i18n import translate
-
-from Products.Five.browser import BrowserView
-from Products.CMFCore.utils import getToolByName
-from Products.statusmessages.interfaces import IStatusMessage
-
-from collective.contact.facetednav.browser.view import json_output
-from collective.contact.facetednav.browser.actions.base import (
-    ActionBase, BatchActionBase)
 from collective.contact.facetednav import _
+from collective.contact.facetednav.browser.actions.base import ActionBase
+from collective.contact.facetednav.browser.actions.base import BatchActionBase
+from collective.contact.facetednav.browser.view import json_output
+from Products.CMFCore.utils import getToolByName
+from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from zope.i18n import translate
 
 
 class DeleteBatchAction(BatchActionBase):
@@ -41,7 +39,7 @@ class DeleteSelection(BrowserView):
         success = 0
         for b in brains:
             obj = b.getObject()
-            if not mtool.checkPermission('Delete objects', obj):  #pylint: disable=E1103
+            if not mtool.checkPermission('Delete objects', obj):  # pylint: disable=E1103
                 fails.append(translate(
                     _(u"Unauthorized: ${path}", mapping={'path': b.getPath()}),
                     context=self.request))

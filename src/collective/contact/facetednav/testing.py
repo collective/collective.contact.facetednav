@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
-import os
-
+from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -12,13 +11,12 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
 from plone.testing import z2
-
-import unittest
-
 from zope.interface import alsoProvides
-from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
-import collective.contact.facetednav
+
 import collective.contact.core
+import collective.contact.facetednav
+import os
+import unittest
 
 
 class CollectiveContactFacetednavLayer(PloneSandboxLayer):

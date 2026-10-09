@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 """Setup/installation tests for this package."""
-import json
-
-from zope.interface.declarations import alsoProvides
+from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
+from collective.contact.facetednav.testing import IntegrationTestCase
+from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
 from plone import api
-
 from plone.app.testing.helpers import login
 from plone.app.testing.interfaces import TEST_USER_NAME
+from zope.interface.declarations import alsoProvides
 
-from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
-
-from collective.contact.facetednav.testing import IntegrationTestCase
-from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
+import json
 
 
 class TestInstall(IntegrationTestCase):

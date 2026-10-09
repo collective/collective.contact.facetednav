@@ -1,17 +1,16 @@
-from json.encoder import JSONEncoder
-
-from Products.Five import BrowserView
-
-from eea.facetednavigation.browser.app.query import FacetedQueryHandler
-
 from collective.contact.facetednav.interfaces import IActionsEnabled
+from eea.facetednavigation.browser.app.query import FacetedQueryHandler
+from json.encoder import JSONEncoder
+from Products.Five import BrowserView
 
 
 class PreviewItem(BrowserView):
     # ????
     pass
 
+
 ACTIONS_ENABLED_KEY = 'collective.contact.facetednav.actions_enabled'
+
 
 class ContactsFacetedQueryHandler(FacetedQueryHandler):
 

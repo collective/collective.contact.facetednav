@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from zope.interface import Interface
 from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Interface
 
 
 class ICollectiveContactFacetednavLayer(IDefaultPloneLayer):
@@ -14,6 +14,7 @@ class IActionsEnabled(Interface):
     where you can select contacts via checkboxes
     and run batch or contextual actions
     """
+
 
 class ISettingsHandler(Interface):
 

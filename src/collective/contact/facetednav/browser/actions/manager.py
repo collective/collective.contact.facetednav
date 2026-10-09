@@ -1,5 +1,6 @@
 """Viewlet managers
 """
+
 from AccessControl.ZopeGuards import guarded_hasattr
 from collective.contact.facetednav.browser.view import ACTIONS_ENABLED_KEY
 from zope.interface import implementer
@@ -8,12 +9,11 @@ from zope.viewlet.manager import WeightOrderedViewletManager
 
 
 def is_available(viewlet):
-    """Check if viewlet is available
-    """
-    if not guarded_hasattr(viewlet, 'render'):
+    """Check if viewlet is available"""
+    if not guarded_hasattr(viewlet, "render"):
         return False
 
-    if hasattr(viewlet, 'available'):
+    if hasattr(viewlet, "available"):
         if callable(viewlet.available):
             available = viewlet.available()
         else:
@@ -32,20 +32,18 @@ class ConditionalViewletManager(WeightOrderedViewletManager):
 
         ``viewlets`` is a list of tuples of the form (name, viewlet).
         """
-        return [(name, viewlet) for name, viewlet in viewlets
-                if is_available(viewlet)]
+        return [(name, viewlet) for name, viewlet in viewlets if is_available(viewlet)]
 
 
 class IBatchActions(IViewletManager):
-    """Interface for batch actions viewlet manager
-    """
+    """Interface for batch actions viewlet manager"""
+
     pass
 
 
 @implementer(IBatchActions)
 class BatchActionsViewletManager(ConditionalViewletManager):
-    """Batch actions viewlet manager
-    """
+    """Batch actions viewlet manager"""
 
 
 class IActions(IViewletManager):

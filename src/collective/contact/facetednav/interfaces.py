@@ -19,5 +19,4 @@ class IActionsEnabled(Interface):
 class ISettingsHandler(Interface):
 
     def toggle_actions_enabled(self, **kwargs):
-        """ Show / hide selection inputs
-        """
+        """Show / hide selection inputs"""

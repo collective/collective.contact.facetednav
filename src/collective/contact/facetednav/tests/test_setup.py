@@ -16,75 +16,76 @@ class TestInstall(IntegrationTestCase):
 
     def setUp(self):
         """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
+        self.portal = self.layer["portal"]
+        self.installer = api.portal.get_tool("portal_quickinstaller")
 
     def test_product_installed(self):
         """Test if collective.contact.facetednav is installed with portal_quickinstaller."""
-        self.assertTrue(self.installer.isProductInstalled('collective.contact.facetednav'))
-        self.assertTrue('mydirectory' in self.portal)
+        self.assertTrue(self.installer.isProductInstalled("collective.contact.facetednav"))
+        self.assertTrue("mydirectory" in self.portal)
         self.assertTrue(IPossibleFacetedNavigable.providedBy(self.portal.mydirectory))
 
     def test_uninstall(self):
         """Test if collective.contact.facetednav is cleanly uninstalled."""
-        self.installer.uninstallProducts(['collective.contact.facetednav'])
-        self.assertFalse(self.installer.isProductInstalled('collective.contact.facetednav'))
+        self.installer.uninstallProducts(["collective.contact.facetednav"])
+        self.assertFalse(self.installer.isProductInstalled("collective.contact.facetednav"))
 
     # browserlayer.xml
     def test_browserlayer(self):
         """Test that ICollectiveContactFacetednavLayer is registered."""
         from plone.browserlayer import utils
+
         self.assertTrue(ICollectiveContactFacetednavLayer in utils.registered_layers())
 
     def test_subtyper(self):
         login(self.portal, TEST_USER_NAME)
         directory = self.portal.mydirectory
         alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
-        subtyper = directory.unrestrictedTraverse('@@contact_faceted_subtyper')
+        subtyper = directory.unrestrictedTraverse("@@contact_faceted_subtyper")
         subtyper.enable_actions()
         self.assertTrue(subtyper.actions_enabled)
         self.assertFalse(subtyper.can_enable_actions())
         self.assertTrue(subtyper.can_disable_actions())
-        self.assertTrue(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
+        self.assertTrue(directory.unrestrictedTraverse("@@faceted_query").actions_enabled())
 
         subtyper.disable_actions()
         self.assertFalse(subtyper.actions_enabled)
         self.assertTrue(subtyper.can_enable_actions())
         self.assertFalse(subtyper.can_disable_actions())
-        self.assertFalse(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
+        self.assertFalse(directory.unrestrictedTraverse("@@faceted_query").actions_enabled())
 
     def test_json_contacts(self):
         login(self.portal, TEST_USER_NAME)
         alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
         directory = self.portal.mydirectory
 
-        self.portal.REQUEST.form['type'] = 'organization'
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
+        self.portal.REQUEST.form["type"] = "organization"
+        json_contacts = json.loads(directory.unrestrictedTraverse("@@json-contacts")())
         self.assertEqual(len(json_contacts), 7)
-        self.assertTrue('id' in json_contacts[0])
-        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/armeedeterre')
+        self.assertTrue("id" in json_contacts[0])
+        self.assertEqual(json_contacts[0]["path"], "/plone/mydirectory/armeedeterre")
 
-        self.portal.REQUEST.form['type'] = 'held_position'
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
+        self.portal.REQUEST.form["type"] = "held_position"
+        json_contacts = json.loads(directory.unrestrictedTraverse("@@json-contacts")())
         self.assertEqual(len(json_contacts), 4)
-        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/degaulle/adt')
+        self.assertEqual(json_contacts[0]["path"], "/plone/mydirectory/degaulle/adt")
 
     def test_json_contacts_select_all_max(self):
         login(self.portal, TEST_USER_NAME)
         alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
         directory = self.portal.mydirectory
 
-        self.portal.REQUEST.form['type'] = 'organization'
-        self.portal.REQUEST.form['cfn_select_all_max'] = 5
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
+        self.portal.REQUEST.form["type"] = "organization"
+        self.portal.REQUEST.form["cfn_select_all_max"] = 5
+        json_contacts = json.loads(directory.unrestrictedTraverse("@@json-contacts")())
         self.assertEqual(len(json_contacts), 6)
 
     def test_delete_action(self):
         login(self.portal, TEST_USER_NAME)
         directory = self.portal.mydirectory
 
-        self.assertIn('rambo', directory)
-        self.portal.REQUEST.form['uids'] = [directory.rambo.UID()]
-        delete_view = directory.unrestrictedTraverse('@@delete_selection')
+        self.assertIn("rambo", directory)
+        self.portal.REQUEST.form["uids"] = [directory.rambo.UID()]
+        delete_view = directory.unrestrictedTraverse("@@delete_selection")
         delete_view()
-        self.assertNotIn('rambo', directory)
+        self.assertNotIn("rambo", directory)

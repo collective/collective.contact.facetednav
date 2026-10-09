@@ -13,14 +13,14 @@ long_description = (
 
 setup(
     name="collective.contact.facetednav",
-    version="1.1.9.dev0",
+    version="2.0.0.dev0",
     description="Faceted navigation view for collective.contact.core directory",
     long_description=long_description,
     # Get more from http://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 6.1",
+        "Framework :: Plone :: 6.2",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.13",
     ],
@@ -30,15 +30,15 @@ setup(
     url="http://pypi.python.org/pypi/collective.contact.facetednav",
     license="GPL",
     packages=find_packages("src", exclude=["ez_setup"]),
-    namespace_packages=["collective", "collective.contact"],
     package_dir={"": "src"},
     include_package_data=True,
     zip_safe=False,
+    python_requires=">=3.10",
     install_requires=[
         "collective.contact.core",
-        "collective.js.backbone",
         "eea.facetednavigation",
         "plone.api",
+        "Products.CMFPlone",
         "setuptools",
     ],
     extras_require={

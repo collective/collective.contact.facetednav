@@ -21,7 +21,7 @@ class ActionBase(ViewletBase):
     index = ViewPageTemplateFile("action.pt")
     klass = None  # css class
     onclick = None  # onclick action. Must be set.
-    icon = None  # action icon. Must be set.
+    icon = None  # action icon, @@iconresolver name. Must be set.
     name = None  # action id. Must be set.
     weight = 1000  # info for actions order
 

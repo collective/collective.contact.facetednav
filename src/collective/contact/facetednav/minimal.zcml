@@ -26,6 +26,14 @@
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
+    <genericsetup:registerProfile
+        name="uninstall"
+        title="collective.contact.facetednav (uninstall)"
+        directory="profiles/uninstall"
+        description="Uninstalls the collective.contact.facetednav add-on."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
     <genericsetup:importStep
         name="collective.contactfacetednav-postInstall"
         title="collective.contact.facetednav post_install import step"

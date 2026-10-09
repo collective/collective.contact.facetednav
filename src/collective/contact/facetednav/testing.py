@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Base module for unittesting."""
 from eea.facetednavigation.subtypes.interfaces import IFacetedNavigable
+from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
@@ -10,7 +11,10 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import TEST_USER_NAME
-from plone.testing import z2
+from plone.testing.zope import installProduct
+from plone.testing.zope import uninstallProduct
+from plone.testing.zope import WSGI_SERVER_FIXTURE
+from zope.globalrequest import setLocal
 from zope.interface import alsoProvides
 
 import collective.contact.core
@@ -27,20 +31,20 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
         """Set up Zope."""
         # Load ZCML
         self.loadZCML(package=collective.contact.facetednav, name="testing.zcml")
-        z2.installProduct(app, "collective.contact.facetednav")
+        installProduct(app, "collective.contact.facetednav")
         self.loadZCML(package=collective.contact.core, name="testing.zcml")
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
+        setLocal("request", portal.REQUEST)  # collective.fingerpointing (imio.fpaudit) needs a request
         # Install into Plone site using portal_setup
         applyProfile(portal, "collective.contact.core:testing")
         # insert some test data
         applyProfile(portal, "collective.contact.core:test_data")
         applyProfile(portal, "collective.contact.facetednav:default")
         alsoProvides(portal.mydirectory, IFacetedNavigable)
-        portal.mydirectory.unrestrictedTraverse("@@faceted_exportimport")._import_xml(
-            import_file=open(os.path.dirname(__file__) + "/tests/contacts-faceted.xml")
-        )
+        with open(os.path.dirname(__file__) + "/tests/contacts-faceted.xml", "rb") as import_file:
+            portal.mydirectory.unrestrictedTraverse("@@faceted_exportimport")._import_xml(import_file=import_file)
 
         # Login and create some test content
         setRoles(portal, TEST_USER_ID, ["Manager"])
@@ -55,7 +59,7 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
 
     def tearDownZope(self, app):
         """Tear down Zope."""
-        z2.uninstallProduct(app, "collective.contact.facetednav")
+        uninstallProduct(app, "collective.contact.facetednav")
 
 
 FIXTURE = CollectiveContactFacetednavLayer(name="FIXTURE")
@@ -63,6 +67,8 @@ FIXTURE = CollectiveContactFacetednavLayer(name="FIXTURE")
 INTEGRATION = IntegrationTesting(bases=(FIXTURE,), name="INTEGRATION")
 
 FUNCTIONAL = FunctionalTesting(bases=(FIXTURE,), name="FUNCTIONAL")
+
+ACCEPTANCE = FunctionalTesting(bases=(FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, WSGI_SERVER_FIXTURE), name="ACCEPTANCE")
 
 
 class IntegrationTestCase(unittest.TestCase):

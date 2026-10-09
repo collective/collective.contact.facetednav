@@ -69,7 +69,7 @@ class DeleteAction(ActionBase):
 
     klass = "delete-contact"
     name = "delete-contact"
-    icon = "delete_icon.png"
+    icon = "plone-delete"
     title = _("Delete this contact")
 
     def url(self):

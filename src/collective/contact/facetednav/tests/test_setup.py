@@ -3,12 +3,18 @@
 from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
 from collective.contact.facetednav.testing import IntegrationTestCase
 from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
-from plone import api
 from plone.app.testing.helpers import login
 from plone.app.testing.interfaces import TEST_USER_NAME
+from plone.base.utils import get_installer
+from plone.browserlayer import utils
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
 from zope.interface.declarations import alsoProvides
 
 import json
+
+
+BUNDLE = "plone.bundles/collective-contact-facetednav"
 
 
 class TestInstall(IntegrationTestCase):
@@ -17,24 +23,41 @@ class TestInstall(IntegrationTestCase):
     def setUp(self):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
-        self.installer = api.portal.get_tool("portal_quickinstaller")
+        self.installer = get_installer(self.portal)
 
     def test_product_installed(self):
-        """Test if collective.contact.facetednav is installed with portal_quickinstaller."""
-        self.assertTrue(self.installer.isProductInstalled("collective.contact.facetednav"))
+        """Test if collective.contact.facetednav is installed."""
+        self.assertTrue(self.installer.is_product_installed("collective.contact.facetednav"))
         self.assertTrue("mydirectory" in self.portal)
         self.assertTrue(IPossibleFacetedNavigable.providedBy(self.portal.mydirectory))
 
     def test_uninstall(self):
         """Test if collective.contact.facetednav is cleanly uninstalled."""
-        self.installer.uninstallProducts(["collective.contact.facetednav"])
-        self.assertFalse(self.installer.isProductInstalled("collective.contact.facetednav"))
+        self.installer.uninstall_product("collective.contact.facetednav")
+        self.assertFalse(self.installer.is_product_installed("collective.contact.facetednav"))
+
+    def test_uninstall_plone6(self):
+        """The uninstall profile removes the browser layer, the bundle and the actions."""
+        self.installer.uninstall_product("collective.contact.facetednav")
+        self.assertNotIn(ICollectiveContactFacetednavLayer, utils.registered_layers())
+        self.assertNotIn(BUNDLE + ".jscompilation", getUtility(IRegistry))
+        self.assertNotIn("faceted.actions.enable", self.portal.portal_actions.object_buttons)
+        self.assertNotIn("faceted.actions.disable", self.portal.portal_actions.object_buttons)
+
+    # registry.xml
+    def test_bundle_plone6(self):
+        """A classic script deferred after eea.facetednavigation's faceted.view bundle."""
+        registry = getUtility(IRegistry)
+        self.assertEqual(registry[BUNDLE + ".jscompilation"], "++resource++collective.contact.facetednav/javascript.js")
+        self.assertEqual(registry[BUNDLE + ".csscompilation"], "++resource++collective.contact.facetednav/style.css")
+        self.assertEqual(registry[BUNDLE + ".depends"], "faceted.view")
+        self.assertTrue(registry[BUNDLE + ".load_defer"])
+        self.assertFalse(registry[BUNDLE + ".load_async"])
+        self.assertIn("faceted.actions.enable", self.portal.portal_actions.object_buttons)
 
     # browserlayer.xml
     def test_browserlayer(self):
         """Test that ICollectiveContactFacetednavLayer is registered."""
-        from plone.browserlayer import utils
-
         self.assertTrue(ICollectiveContactFacetednavLayer in utils.registered_layers())
 
     def test_subtyper(self):
@@ -67,7 +90,7 @@ class TestInstall(IntegrationTestCase):
 
         self.portal.REQUEST.form["type"] = "held_position"
         json_contacts = json.loads(directory.unrestrictedTraverse("@@json-contacts")())
-        self.assertEqual(len(json_contacts), 4)
+        self.assertEqual(len(json_contacts), 6)
         self.assertEqual(json_contacts[0]["path"], "/plone/mydirectory/degaulle/adt")
 
     def test_json_contacts_select_all_max(self):

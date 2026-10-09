@@ -9,7 +9,7 @@ class EditAction(ActionBase):
 
     klass = "edit-contact"
     name = "edit-contact"
-    icon = "edit.png"
+    icon = "plone-edit"
     title = PMF("Edit")
     weight = 200
 

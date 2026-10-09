@@ -4,6 +4,8 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     i18n_domain="collective.contact.facetednav">
 
+  <include package="Products.CMFCore" file="permissions.zcml" />
+
   <browser:viewlet
       name="collective.contact.facetednav.action.edit"
       manager="collective.contact.facetednav.browser.actions.manager.IActions"

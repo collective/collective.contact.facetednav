@@ -2,6 +2,8 @@
     :target: https://github.com/collective/collective.contact.facetednav/actions/workflows/main.yml
 .. image:: https://coveralls.io/repos/github/collective/collective.contact.facetednav/badge.svg
     :target: https://coveralls.io/github/collective/collective.contact.facetednav
+.. image:: http://img.shields.io/pypi/v/collective.contact.facetednav.svg
+    :target: https://pypi.python.org/pypi/collective.contact.facetednav
 
 =============================
 collective.contact.facetednav
@@ -78,16 +80,6 @@ Have an idea? Found a bug? Let us know by `opening a ticket`_.
 - Documentation: https://github.com/collective/collective.contact.demo/blob/master/README.md
 
 .. _`opening a ticket`: https://github.com/collective/collective.contact.facetednav/issues
-
-
-Tests
-=====
-
-This add-on is tested using GitHub Actions (status badges at the top of this file).
-
-
-.. image:: http://img.shields.io/pypi/v/collective.contact.facetednav.svg
-    :target: https://pypi.python.org/pypi/collective.contact.facetednav
 
 
 License

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """Module where all interfaces, events and exceptions live."""
 
-from zope.interface import Interface
 from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Interface
 
 
 class ICollectiveContactFacetednavLayer(IDefaultPloneLayer):
@@ -15,8 +15,8 @@ class IActionsEnabled(Interface):
     and run batch or contextual actions
     """
 
+
 class ISettingsHandler(Interface):
 
     def toggle_actions_enabled(self, **kwargs):
-        """ Show / hide selection inputs
-        """
+        """Show / hide selection inputs"""

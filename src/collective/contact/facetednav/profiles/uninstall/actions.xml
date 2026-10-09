@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool">
+ <object name="object_buttons" meta_type="CMF Action Category">
+  <object name="faceted.actions.disable" remove="True" />
+  <object name="faceted.actions.enable" remove="True" />
+ </object>
+</object>

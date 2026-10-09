@@ -1,11 +1,15 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="collective.contact.facetednav">
 
   <include file="configure.zcml" />
 
   <include package="ecreall.helpers.testing" />
+  <!-- collective.contact.core @@add-contact (create contact link): z3c.autoinclude loads it on a site -->
+  <include package="plone.formwidget.contenttree"
+           zcml:condition="installed plone.formwidget.contenttree" />
 
   <genericsetup:registerProfile
       name="testing"

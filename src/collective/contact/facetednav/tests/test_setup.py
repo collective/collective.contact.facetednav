@@ -1,93 +1,116 @@
 # -*- coding: utf-8 -*-
-"""Setup/installation tests for this package."""
-import json
+"""Install profile (profiles/default) and uninstall."""
 
-from zope.interface.declarations import alsoProvides
-from plone import api
-
-from plone.app.testing.helpers import login
-from plone.app.testing.interfaces import TEST_USER_NAME
-
-from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
-
-from collective.contact.facetednav.testing import IntegrationTestCase
 from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
+from collective.contact.facetednav.testing import IntegrationTestCase
+from eea.facetednavigation.interfaces import IPossibleFacetedNavigable
+from plone import api
+from plone.browserlayer import utils
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+
+
+try:
+    from Products.CMFPlone.utils import get_installer
+except ImportError:  # Plone < 5.1
+    get_installer = None
+
+
+PACKAGE = "collective.contact.facetednav"
+JS = "++resource++collective.contact.facetednav/javascript.js"
+CSS = "++resource++collective.contact.facetednav/style.css"
+BEHAVIOR = "eea.faceted.navigable"
+ACTIONS = ("faceted.actions.enable", "faceted.actions.disable")
+
+
+def is_installed(portal, product):
+    if get_installer is None:
+        return api.portal.get_tool("portal_quickinstaller").isProductInstalled(product)
+    return get_installer(portal).is_product_installed(product)
+
+
+def uninstall(portal, product):
+    if get_installer is None:
+        api.portal.get_tool("portal_quickinstaller").uninstallProducts([product])
+    else:
+        get_installer(portal).uninstall_product(product)
+
+
+def registered_resources(portal):
+    """ids of the css and js resources: portal_css/portal_javascripts (Plone 4) or registry bundles"""
+    if "portal_css" in portal.objectIds():
+        return set(api.portal.get_tool("portal_css").getResourceIds()) | set(
+            api.portal.get_tool("portal_javascripts").getResourceIds()
+        )
+    registry = getUtility(IRegistry)
+    return set(
+        registry[name]
+        for name in registry.records.keys()
+        if name.startswith("plone.bundles/") and name.endswith("compilation")
+    )
+
+
+def object_buttons(portal):
+    return api.portal.get_tool("portal_actions").object_buttons
 
 
 class TestInstall(IntegrationTestCase):
     """Test installation of collective.contact.facetednav into Plone."""
 
-    def setUp(self):
-        """Custom shared utility setup for tests."""
-        self.portal = self.layer['portal']
-        self.installer = api.portal.get_tool('portal_quickinstaller')
-
     def test_product_installed(self):
-        """Test if collective.contact.facetednav is installed with portal_quickinstaller."""
-        self.assertTrue(self.installer.isProductInstalled('collective.contact.facetednav'))
-        self.assertTrue('mydirectory' in self.portal)
-        self.assertTrue(IPossibleFacetedNavigable.providedBy(self.portal.mydirectory))
-
-    def test_uninstall(self):
-        """Test if collective.contact.facetednav is cleanly uninstalled."""
-        self.installer.uninstallProducts(['collective.contact.facetednav'])
-        self.assertFalse(self.installer.isProductInstalled('collective.contact.facetednav'))
+        self.assertTrue(is_installed(self.portal, PACKAGE))
+        # metadata.xml dependencies (collective.js.backbone dropped on Plone 6)
+        setup = api.portal.get_tool("portal_setup")
+        for profile in ("collective.contact.core:default", "eea.facetednavigation:default"):
+            self.assertNotEqual(setup.getLastVersionForProfile(profile), "unknown", profile)
 
     # browserlayer.xml
     def test_browserlayer(self):
-        """Test that ICollectiveContactFacetednavLayer is registered."""
-        from plone.browserlayer import utils
-        self.assertTrue(ICollectiveContactFacetednavLayer in utils.registered_layers())
+        self.assertIn(ICollectiveContactFacetednavLayer, utils.registered_layers())
 
-    def test_subtyper(self):
-        login(self.portal, TEST_USER_NAME)
-        directory = self.portal.mydirectory
-        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
-        subtyper = directory.unrestrictedTraverse('@@contact_faceted_subtyper')
-        subtyper.enable_actions()
-        self.assertTrue(subtyper.actions_enabled)
-        self.assertFalse(subtyper.can_enable_actions())
-        self.assertTrue(subtyper.can_disable_actions())
-        self.assertTrue(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
+    # actions.xml
+    def test_actions(self):
+        buttons = object_buttons(self.portal)
+        for action_id in ACTIONS:
+            action = buttons[action_id]
+            name = action_id.split(".")[-1]
+            self.assertEqual(
+                action.url_expr, "string:${object/absolute_url}/@@contact_faceted_subtyper/%s_actions" % name
+            )
+            self.assertEqual(action.available_expr, "object/@@contact_faceted_subtyper/can_%s_actions" % name)
+            self.assertEqual(action.permissions, ("eea.facetednavigation: Configure faceted",))
+            self.assertTrue(action.visible)
 
-        subtyper.disable_actions()
-        self.assertFalse(subtyper.actions_enabled)
-        self.assertTrue(subtyper.can_enable_actions())
-        self.assertFalse(subtyper.can_disable_actions())
-        self.assertFalse(directory.unrestrictedTraverse('@@faceted_query').actions_enabled())
+    # types/directory.xml
+    def test_directory_behavior(self):
+        fti = api.portal.get_tool("portal_types").directory
+        self.assertIn(BEHAVIOR, fti.behaviors)
+        self.assertTrue(IPossibleFacetedNavigable.providedBy(self.directory))
 
-    def test_json_contacts(self):
-        login(self.portal, TEST_USER_NAME)
-        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
-        directory = self.portal.mydirectory
+    # cssregistry.xml, jsregistry.xml
+    def test_resources(self):
+        resources = registered_resources(self.portal)
+        self.assertIn(JS, resources)
+        self.assertIn(CSS, resources)
 
-        self.portal.REQUEST.form['type'] = 'organization'
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
-        self.assertEqual(len(json_contacts), 7)
-        self.assertTrue('id' in json_contacts[0])
-        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/armeedeterre')
+    # registry.xml
+    def test_bundle(self):
+        """classic script deferred after eea.facetednavigation's faceted.view bundle"""
+        registry = getUtility(IRegistry)
+        bundle = "plone.bundles/collective-contact-facetednav"
+        self.assertEqual(registry[bundle + ".jscompilation"], JS)
+        self.assertEqual(registry[bundle + ".csscompilation"], CSS)
+        self.assertEqual(registry[bundle + ".depends"], "faceted.view")
+        self.assertTrue(registry[bundle + ".load_defer"])
+        self.assertFalse(registry[bundle + ".load_async"])
 
-        self.portal.REQUEST.form['type'] = 'held_position'
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
-        self.assertEqual(len(json_contacts), 4)
-        self.assertEqual(json_contacts[0]['path'], '/plone/mydirectory/degaulle/adt')
-
-    def test_json_contacts_select_all_max(self):
-        login(self.portal, TEST_USER_NAME)
-        alsoProvides(self.portal.REQUEST, ICollectiveContactFacetednavLayer)
-        directory = self.portal.mydirectory
-
-        self.portal.REQUEST.form['type'] = 'organization'
-        self.portal.REQUEST.form['cfn_select_all_max'] = 5
-        json_contacts = json.loads(directory.unrestrictedTraverse('@@json-contacts')())
-        self.assertEqual(len(json_contacts), 6)
-
-    def test_delete_action(self):
-        login(self.portal, TEST_USER_NAME)
-        directory = self.portal.mydirectory
-
-        self.assertIn('rambo', directory)
-        self.portal.REQUEST.form['uids'] = [directory.rambo.UID()]
-        delete_view = directory.unrestrictedTraverse('@@delete_selection')
-        delete_view()
-        self.assertNotIn('rambo', directory)
+    def test_uninstall(self):
+        uninstall(self.portal, PACKAGE)
+        self.assertFalse(is_installed(self.portal, PACKAGE))
+        self.assertNotIn(ICollectiveContactFacetednavLayer, utils.registered_layers())
+        buttons = object_buttons(self.portal)
+        for action_id in ACTIONS:
+            self.assertNotIn(action_id, buttons.objectIds())
+        resources = registered_resources(self.portal)
+        self.assertNotIn(JS, resources)
+        self.assertNotIn(CSS, resources)

@@ -1,29 +1,28 @@
 """ Subtyping support
 """
-from zope.interface import implementer
-from zope.interface import alsoProvides, noLongerProvides
-from zope.publisher.interfaces import NotFound
 
-from Products.statusmessages.interfaces import IStatusMessage
-from Products.Five.browser import BrowserView
-
+from collective.contact.facetednav import _
 from collective.contact.facetednav.browser.interfaces import IContactFacetedSubtyper
 from collective.contact.facetednav.interfaces import IActionsEnabled
-from collective.contact.facetednav import _
+from Products.Five.browser import BrowserView
+from Products.statusmessages.interfaces import IStatusMessage
+from zope.interface import alsoProvides
+from zope.interface import implementer
+from zope.interface import noLongerProvides
+from zope.publisher.interfaces import NotFound
 
 
 @implementer(IContactFacetedSubtyper)
 class ContactFacetedPublicSubtyper(BrowserView):
-    """ Public support for subtyping objects
-        view for non IPossibleFacetedNavigable objects
+    """Public support for subtyping objects
+    view for non IPossibleFacetedNavigable objects
     """
 
-    def _redirect(self, msg=''):
-        """ Redirect
-        """
+    def _redirect(self, msg=""):
+        """Redirect"""
         if self.request:
             if msg:
-                IStatusMessage(self.request).addStatusMessage(msg, type='info')
+                IStatusMessage(self.request).addStatusMessage(msg, type="info")
             self.request.response.redirect(self.context.absolute_url())
         return msg
 
@@ -32,52 +31,44 @@ class ContactFacetedPublicSubtyper(BrowserView):
         return IActionsEnabled.providedBy(self.context)
 
     def can_enable_actions(self):
-        """Can enable selection
-        """
+        """Can enable selection"""
         return False
 
     def can_disable_actions(self):
-        """Can disable selection
-        """
+        """Can disable selection"""
         return False
 
     def enable_actions(self):
-        """Enable selection
-        """
-        raise NotFound(self.context, 'enable_actions', self.request)
+        """Enable selection"""
+        raise NotFound(self.context, "enable_actions", self.request)
 
     def disable_actions(self):
-        """Disable selection
-        """
-        raise NotFound(self.context, 'disable_actions', self.request)
+        """Disable selection"""
+        raise NotFound(self.context, "disable_actions", self.request)
 
 
 class ContactFacetedSubtyper(ContactFacetedPublicSubtyper):
-    """ Support for subtyping objects
-        view for IPossibleFacetedNavigable objects
+    """Support for subtyping objects
+    view for IPossibleFacetedNavigable objects
     """
 
     def can_enable_actions(self):
-        """
-        """
+        """ """
         return not self.actions_enabled
 
     def can_disable_actions(self):
-        """
-        """
+        """ """
         return self.actions_enabled
 
     def enable_actions(self):
-        """
-        """
+        """ """
         if not self.can_enable_actions():
-            return self._redirect('Faceted navigation not supported')
+            return self._redirect("Faceted navigation not supported")
         alsoProvides(self.context, IActionsEnabled)
 
-        self._redirect(_('Contacts actions enabled'))
+        self._redirect(_("Contacts actions enabled"))
 
     def disable_actions(self):
-        """
-        """
+        """ """
         noLongerProvides(self.context, IActionsEnabled)
-        self._redirect(_('Contacts actions disabled'))
+        self._redirect(_("Contacts actions disabled"))

@@ -3,7 +3,8 @@
 
 from zope.i18nmessageid import MessageFactory
 
-_ = MessageFactory('collective.contact.facetednav')
+
+_ = MessageFactory("collective.contact.facetednav")
 
 
 def initialize(context):

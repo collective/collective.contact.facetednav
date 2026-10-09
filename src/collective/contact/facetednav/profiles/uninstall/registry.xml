@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<registry>
+  <records prefix="plone.bundles/collective-contact-facetednav"
+           interface="plone.base.interfaces.IBundleRegistry"
+           remove="True" />
+</registry>

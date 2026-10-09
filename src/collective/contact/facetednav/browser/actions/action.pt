@@ -10,7 +10,7 @@
                       onclick view/onclick|nothing;
                       ">
      <img i18n:domain="plone"
-          tal:attributes="src string:${view/site_url}/${view/icon};
+          tal:attributes="src python:context.restrictedTraverse('@@iconresolver').url(view.icon);
 					      alt view/title;
 					      title view/title"
           i18n:attributes="alt; title" />

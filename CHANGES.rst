@@ -2,10 +2,12 @@ Changelog
 =========
 
 
-1.1.9 (unreleased)
+2.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Migrate to Plone 6.2 (Python 3 only, Plone 4 dropped): faceted results without `global_defines`,
+  JavaScript without Backbone and jQuery Tools (Plone modals), based on the work started by @laulaz on `plone6`.
+  [laulaz, chris-adam]
 
 
 1.1.8 (2021-04-20)

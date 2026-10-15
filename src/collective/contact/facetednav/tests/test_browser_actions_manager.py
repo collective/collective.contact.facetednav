@@ -72,7 +72,7 @@ class TestBatchActionsViewletManager(IntegrationTestCase):
             html.index('id="contact-facetednav-action-excelexport"'),
         )
         self.assertIn('id="contacts-selection-num"', html)
-        self.assertIn('<span class="num">0</span>', html)
+        self.assertIn('<span class="num" >0</span>', html)
         # status messages (e.g. of @@delete_selection) are shown above the batch actions
         IStatusMessage(self.request).add("2 object(s) deleted")
         self.assertIn("2 object(s) deleted", manager.render())

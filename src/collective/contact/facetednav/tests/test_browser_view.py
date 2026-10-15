@@ -158,7 +158,7 @@ class TestPreviewItem(IntegrationTestCase):
         self.request.set(ACTIONS_ENABLED_KEY, False)
         # person: title, phone, email, held positions with their phone/email when the person has none
         html = self.preview(self.directory.pepper)
-        self.assertIn('class="contact-title">Mister Pepper</span>', html)
+        self.assertIn('class="contact-title" >Mister Pepper</span>', html)
         self.assertIn("0288443344", html)
         self.assertIn('href="mailto:stephen.pepper@private.com"', html)
         self.assertIn(
@@ -175,7 +175,7 @@ class TestPreviewItem(IntegrationTestCase):
         self.assertNotIn("contacts-facetednav-actions", html)
         # organization: title, phone, email
         html = self.preview(self.directory.armeedeterre)
-        self.assertIn('class="organization-title">Armée de terre</span>', html)
+        self.assertIn('class="organization-title" >Armée de terre</span>', html)
         self.assertIn("01000000001", html)
         self.assertIn('href="mailto:contact@armees.fr"', html)
         # held position: full title, own phone and email

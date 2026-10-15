@@ -18,7 +18,10 @@ class DeleteBatchAction(BatchActionBase):
     @property
     def onclick(self):
         return 'contactfacetednav.delete_selection("%s")' % translate(
-            _("confirm_delete_selection", default="Are you sure you want to remove $num selected content(s) ?"),
+            _(
+                "confirm_delete_selection",
+                default="Are you sure you want to remove $num selected content(s) ?",
+            ),
             context=self.request,
         )
 
@@ -39,15 +42,26 @@ class DeleteSelection(BrowserView):
         success = 0
         for b in brains:
             obj = b.getObject()
-            if not mtool.checkPermission("Delete objects", obj):  # pylint: disable=E1103
-                fails.append(translate(_("Unauthorized: ${path}", mapping={"path": b.getPath()}), context=self.request))
+            if not mtool.checkPermission(
+                "Delete objects", obj
+            ):  # pylint: disable=E1103
+                fails.append(
+                    translate(
+                        _("Unauthorized: ${path}", mapping={"path": b.getPath()}),
+                        context=self.request,
+                    )
+                )
             else:
                 parent = obj.getParentNode()
                 parent.manage_delObjects([obj.getId()])
                 success += 1
 
         IStatusMessage(self.request).add(
-            _("msg_objects_deleted", default="${num} object(s) deleted", mapping={"num": success})
+            _(
+                "msg_objects_deleted",
+                default="${num} object(s) deleted",
+                mapping={"num": success},
+            )
         )
 
         if fails:

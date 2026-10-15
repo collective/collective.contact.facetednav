@@ -1,5 +1,4 @@
-""" Subtyping support
-"""
+"""Subtyping support"""
 
 from collective.contact.facetednav import _
 from collective.contact.facetednav.browser.interfaces import IContactFacetedSubtyper

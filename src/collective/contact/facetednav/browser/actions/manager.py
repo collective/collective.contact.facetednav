@@ -1,5 +1,4 @@
-"""Viewlet managers
-"""
+"""Viewlet managers"""
 
 from AccessControl.ZopeGuards import guarded_hasattr
 from collective.contact.facetednav.browser.view import ACTIONS_ENABLED_KEY

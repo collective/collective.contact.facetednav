@@ -1,7 +1,6 @@
 from collective.contact.facetednav.browser.actions.base import ActionBase
 from zope.i18nmessageid.message import MessageFactory
 
-
 PMF = MessageFactory("plone")
 
 

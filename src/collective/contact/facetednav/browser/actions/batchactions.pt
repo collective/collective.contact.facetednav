@@ -1,32 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
-  lang="en"
-  xmlns:tal="http://xml.zope.org/namespaces/tal"
-  xmlns:metal="http://xml.zope.org/namespaces/metal"
-  xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-  i18n:domain="collective.contact.facetednav"
-  tal:define="dummy view/update"
-  tal:omit-tag=""
-  >
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      lang="en"
+      tal:define="
+        dummy view/update;
+      "
+      tal:omit-tag=""
+      i18n:domain="collective.contact.facetednav"
+>
   <div id="contacts-facetednav-batchactions">
     <div metal:use-macro="context/global_statusmessage/macros/portal_message">
      Status message
     </div>
 
-    <input type="button" name="selectall"
+    <input class="standalone"
            id="contacts-selectall"
-           class="standalone"
-           i18n:attributes="data-select-all-msg; data-unselect-all-msg;data-select-all-too-large-msg"
+           name="selectall"
+           type="button"
            data-select-all-msg="Select all"
            data-select-all-too-large-msg="Results is too large for mass selection"
            data-unselect-all-msg="Unselect all"
-            />
+           i18n:attributes="data-select-all-msg; data-unselect-all-msg;data-select-all-too-large-msg"
+    />
     <span class="contacts-buttons">
-	  <tal:viewlets repeat="viewlet view/viewlets">
-	    <tal:viewlet content="structure viewlet/render" />
-	  </tal:viewlets>
-	</span>
-	<span i18n:translate="selected_contacts_num" id="contacts-selection-num">
-		Selected contacts: <span i18n:name="num" class="num">0</span>
+      <tal:viewlets repeat="viewlet view/viewlets">
+        <tal:viewlet content="structure viewlet/render" />
+      </tal:viewlets>
+    </span>
+    <span id="contacts-selection-num"
+          i18n:translate="selected_contacts_num"
+    >
+		Selected contacts:
+      <span class="num"
+            i18n:name="num"
+      >0</span>
     </span>
   </div>
 </html>

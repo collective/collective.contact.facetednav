@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.contact.facetednav.browser.view import ACTIONS_ENABLED_KEY
 from collective.contact.facetednav.browser.view import json_output
 from collective.contact.facetednav.interfaces import IActionsEnabled
@@ -20,7 +19,9 @@ class TestView(IntegrationTestCase):
         def method(value, key="id"):
             return [{key: value}]
 
-        self.assertEqual(json.loads(method("Général", key="title")), [{"title": "Général"}])
+        self.assertEqual(
+            json.loads(method("Général", key="title")), [{"title": "Général"}]
+        )
         self.assertEqual(json.loads(method(None)), [{"id": None}])
 
 
@@ -29,7 +30,12 @@ class TestContactsFacetedQueryHandler(IntegrationTestCase):
 
     def faceted_query(self, **form):
         self.request.form.update(form)
-        for key, value in form.items():  # request.get reads 'other' first: stale after the first query
+        for (
+            key,
+            value,
+        ) in (
+            form.items()
+        ):  # request.get reads 'other' first: stale after the first query
             self.request.set(key, value)
         return self.directory.restrictedTraverse("@@faceted_query")()
 
@@ -70,10 +76,18 @@ class TestContactsFacetedQueryHandler(IntegrationTestCase):
         self.assertEqual(html.count('class="contacts-facetednav-actions"'), 4)
         # add links of the type (Manager may add content)
         self.assertIn('id="faceted-add"', html)
-        self.assertIn("++add++person?form.widgets.lastname=&amp;form.widgets.firstname=", html)
-        self.assertIn('class="faceted-add-contact" href="http://nohost/plone/mydirectory/@@add-contact"', html)
+        self.assertIn(
+            "++add++person?form.widgets.lastname=&amp;form.widgets.firstname=", html
+        )
+        self.assertIn(
+            'class="faceted-add-contact" href="http://nohost/plone/mydirectory/@@add-contact"',
+            html,
+        )
         self.assertNotIn("faceted-add-organization", html)
-        self.assertIn('<img src="http://nohost/plone/++resource++collective.contact.core/create_contact.png" />', html)
+        self.assertIn(
+            '<img src="http://nohost/plone/++resource++collective.contact.core/create_contact.png" />',
+            html,
+        )
         # no result, add links with the searched text
         html = self.faceted_query(**{"type[]": "person", "texte[]": "Jean Dupont"})
         self.assertNotIn('class="contact-entry"', html)
@@ -86,13 +100,20 @@ class TestContactsFacetedQueryHandler(IntegrationTestCase):
             html,
         )
         html = self.faceted_query(**{"type[]": "held_position", "texte[]": "Dupont"})
-        self.assertIn("++add++person?form.widgets.lastname=Dupont&amp;form.widgets.firstname=", html)
+        self.assertIn(
+            "++add++person?form.widgets.lastname=Dupont&amp;form.widgets.firstname=",
+            html,
+        )
         self.assertIn("faceted-add-contact", html)
         html = self.faceted_query(**{"type[]": "organization", "texte[]": "Navy Seal"})
-        self.assertIn('href="http://nohost/plone/mydirectory/++add++organization?form.widgets.title=Navy+Seal"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/++add++organization?form.widgets.title=Navy+Seal"',
+            html,
+        )
         self.assertNotIn("faceted-add-person", html)
         self.assertIn(
-            '<img src="http://nohost/plone/++resource++collective.contact.core/organization_icon.png" />', html
+            '<img src="http://nohost/plone/++resource++collective.contact.core/organization_icon.png" />',
+            html,
         )
         self.assertNotIn("faceted-add-contact", html)
         # no add link for a user who may not add content
@@ -104,18 +125,27 @@ class TestContactsFacetedQueryHandler(IntegrationTestCase):
     @unittest.expectedFailure
     def test___call___add_links_prefill(self):
         """Plone 4 bug: the add forms ignore the values the "Create ..." links carry: z3c.form ignores
-        form values sent by GET (Plone hotfix 20160830) and the organization title is form.widgets.IBasic.title"""
+        form values sent by GET (Plone hotfix 20160830) and the organization title is form.widgets.IBasic.title
+        """
         for type_name, text, widget in (
             ("organization", "Navy", "IBasic.title"),
             ("person", "Jean Dupont", "lastname"),
         ):
             html = self.faceted_query(**{"type[]": type_name, "texte[]": text})
-            url = html.split('class="faceted-add-%s" href="' % type_name)[1].split('"')[0].replace("&amp;", "&")
+            url = (
+                html.split('class="faceted-add-%s" href="' % type_name)[1]
+                .split('"')[0]
+                .replace("&amp;", "&")
+            )
             path, query = url.replace("http://nohost/plone/", "").split("?")
-            self.request.form.update(dict(param.split("=") for param in query.split("&")))
+            self.request.form.update(
+                dict(param.split("=") for param in query.split("&"))
+            )
             add_form = self.portal.restrictedTraverse(str(path))
             add_form.update()
-            self.assertEqual(add_form.form_instance.widgets[widget].value, text.split(" ")[-1])
+            self.assertEqual(
+                add_form.form_instance.widgets[widget].value, text.split(" ")[-1]
+            )
 
 
 class TestPreviewItem(IntegrationTestCase):
@@ -131,9 +161,14 @@ class TestPreviewItem(IntegrationTestCase):
         self.assertIn('class="contact-title">Mister Pepper</span>', html)
         self.assertIn("0288443344", html)
         self.assertIn('href="mailto:stephen.pepper@private.com"', html)
-        self.assertIn('href="http://nohost/plone/mydirectory/pepper/sergent_pepper"', html)
+        self.assertIn(
+            'href="http://nohost/plone/mydirectory/pepper/sergent_pepper"', html
+        )
         self.assertIn("Sergent de la brigade LH", html)
-        self.assertIn('src="http://nohost/plone/++resource++collective.contact.core/defaultUser.png"', html)
+        self.assertIn(
+            'src="http://nohost/plone/++resource++collective.contact.core/defaultUser.png"',
+            html,
+        )
         html = self.preview(self.directory.draper)
         self.assertIn("Capitaine de la division Alpha", html)
         self.assertIn("Division Beta", html)
@@ -171,7 +206,12 @@ class TestJSONContacts(IntegrationTestCase):
         self.assertEqual(len(view.query()), len(api.content.find(context=self.portal)))
         # as sent by javascript: all the results, whatever the batch start and size
         self.request.form.update(
-            {"type[]": "held_position", "b_start[]": "2", "resultsnum[]": "5", "sort[]": "sortable_title"}
+            {
+                "type[]": "held_position",
+                "b_start[]": "2",
+                "resultsnum[]": "5",
+                "sort[]": "sortable_title",
+            }
         )
         brains = view.query()
         self.assertEqual(len(brains), 6)
@@ -184,10 +224,17 @@ class TestJSONContacts(IntegrationTestCase):
         contacts = self.json_contacts(**{"type[]": "organization"})
         self.assertEqual(len(contacts), 7)
         self.assertEqual(
-            contacts[0], {"id": self.directory.armeedeterre.UID(), "path": "/plone/mydirectory/armeedeterre"}
+            contacts[0],
+            {
+                "id": self.directory.armeedeterre.UID(),
+                "path": "/plone/mydirectory/armeedeterre",
+            },
         )
         self.assertEqual(self.request.response.getHeader("Cache-Control"), "no-cache")
         self.assertEqual(self.request.response.getHeader("Pragma"), "no-cache")
         contacts = self.json_contacts(**{"type[]": "person", "texte[]": "Rambo"})
-        self.assertEqual(contacts, [{"id": self.directory.rambo.UID(), "path": "/plone/mydirectory/rambo"}])
+        self.assertEqual(
+            contacts,
+            [{"id": self.directory.rambo.UID(), "path": "/plone/mydirectory/rambo"}],
+        )
         self.assertEqual(self.json_contacts(**{"texte[]": "Nobody"}), [])

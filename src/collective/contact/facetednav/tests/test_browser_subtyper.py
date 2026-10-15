@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from collective.contact.facetednav.browser.subtyper import ContactFacetedPublicSubtyper
 from collective.contact.facetednav.browser.subtyper import ContactFacetedSubtyper
@@ -20,7 +19,7 @@ class TestContactFacetedPublicSubtyper(IntegrationTestCase):
     """@@contact_faceted_subtyper of the contents that can't be faceted (a person)"""
 
     def setUp(self):
-        super(TestContactFacetedPublicSubtyper, self).setUp()
+        super().setUp()
         self.person = self.directory.rambo
         self.subtyper = self.person.restrictedTraverse("@@contact_faceted_subtyper")
 
@@ -47,7 +46,10 @@ class TestContactFacetedPublicSubtyper(IntegrationTestCase):
 
     def test__redirect(self):
         self.assertEqual(self.subtyper._redirect(), "")
-        self.assertEqual(self.request.response.getHeader("location"), "http://nohost/plone/mydirectory/rambo")
+        self.assertEqual(
+            self.request.response.getHeader("location"),
+            "http://nohost/plone/mydirectory/rambo",
+        )
         self.assertEqual(messages(self.request), [])
         self.assertEqual(self.subtyper._redirect("Done"), "Done")
         self.assertEqual(messages(self.request), ["Done"])
@@ -57,7 +59,7 @@ class TestContactFacetedSubtyper(IntegrationTestCase):
     """@@contact_faceted_subtyper of a faceted directory (Actions menu: actions.xml)"""
 
     def setUp(self):
-        super(TestContactFacetedSubtyper, self).setUp()
+        super().setUp()
         self.subtyper = self.directory.restrictedTraverse("@@contact_faceted_subtyper")
 
     def test_can_enable_actions(self):
@@ -75,7 +77,10 @@ class TestContactFacetedSubtyper(IntegrationTestCase):
         self.subtyper.enable_actions()
         self.assertTrue(IActionsEnabled.providedBy(self.directory))
         self.assertTrue(self.subtyper.actions_enabled)
-        self.assertEqual(self.request.response.getHeader("location"), "http://nohost/plone/mydirectory")
+        self.assertEqual(
+            self.request.response.getHeader("location"),
+            "http://nohost/plone/mydirectory",
+        )
         self.assertEqual(messages(self.request), ["Contacts actions enabled"])
         # already enabled
         self.subtyper.enable_actions()
@@ -83,14 +88,21 @@ class TestContactFacetedSubtyper(IntegrationTestCase):
         self.assertEqual(messages(self.request)[-1], "Faceted navigation not supported")
         # needs the "eea.facetednavigation: Configure faceted" permission
         setRoles(self.portal, TEST_USER_ID, ["Member", "Reader"])
-        self.assertRaises(Unauthorized, self.directory.restrictedTraverse, "@@contact_faceted_subtyper")
+        self.assertRaises(
+            Unauthorized,
+            self.directory.restrictedTraverse,
+            "@@contact_faceted_subtyper",
+        )
 
     def test_disable_actions(self):
         alsoProvides(self.directory, IActionsEnabled)
         self.subtyper.disable_actions()
         self.assertFalse(IActionsEnabled.providedBy(self.directory))
         self.assertFalse(self.subtyper.actions_enabled)
-        self.assertEqual(self.request.response.getHeader("location"), "http://nohost/plone/mydirectory")
+        self.assertEqual(
+            self.request.response.getHeader("location"),
+            "http://nohost/plone/mydirectory",
+        )
         self.assertEqual(messages(self.request), ["Contacts actions disabled"])
         # already disabled
         self.subtyper.disable_actions()

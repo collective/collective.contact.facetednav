@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Install profile (profiles/default) and uninstall."""
 
 from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
@@ -8,7 +7,6 @@ from plone import api
 from plone.browserlayer import utils
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
-
 
 try:
     from Products.CMFPlone.utils import get_installer
@@ -43,11 +41,11 @@ def registered_resources(portal):
             api.portal.get_tool("portal_javascripts").getResourceIds()
         )
     registry = getUtility(IRegistry)
-    return set(
+    return {
         registry[name]
         for name in registry.records.keys()
         if name.startswith("plone.bundles/") and name.endswith("compilation")
-    )
+    }
 
 
 def object_buttons(portal):
@@ -61,8 +59,13 @@ class TestInstall(IntegrationTestCase):
         self.assertTrue(is_installed(self.portal, PACKAGE))
         # metadata.xml dependencies (collective.js.backbone dropped on Plone 6)
         setup = api.portal.get_tool("portal_setup")
-        for profile in ("collective.contact.core:default", "eea.facetednavigation:default"):
-            self.assertNotEqual(setup.getLastVersionForProfile(profile), "unknown", profile)
+        for profile in (
+            "collective.contact.core:default",
+            "eea.facetednavigation:default",
+        ):
+            self.assertNotEqual(
+                setup.getLastVersionForProfile(profile), "unknown", profile
+            )
 
     # browserlayer.xml
     def test_browserlayer(self):
@@ -75,10 +78,17 @@ class TestInstall(IntegrationTestCase):
             action = buttons[action_id]
             name = action_id.split(".")[-1]
             self.assertEqual(
-                action.url_expr, "string:${object/absolute_url}/@@contact_faceted_subtyper/%s_actions" % name
+                action.url_expr,
+                "string:${object/absolute_url}/@@contact_faceted_subtyper/%s_actions"
+                % name,
             )
-            self.assertEqual(action.available_expr, "object/@@contact_faceted_subtyper/can_%s_actions" % name)
-            self.assertEqual(action.permissions, ("eea.facetednavigation: Configure faceted",))
+            self.assertEqual(
+                action.available_expr,
+                "object/@@contact_faceted_subtyper/can_%s_actions" % name,
+            )
+            self.assertEqual(
+                action.permissions, ("eea.facetednavigation: Configure faceted",)
+            )
             self.assertTrue(action.visible)
 
     # types/directory.xml

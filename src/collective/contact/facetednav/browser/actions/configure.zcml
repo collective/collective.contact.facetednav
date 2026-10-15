@@ -2,22 +2,23 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.contact.facetednav">
+    i18n_domain="collective.contact.facetednav"
+    >
 
-   <browser:viewletManager
-    name="collective.contact.facetednav.batchactions"
-    provides=".manager.IBatchActions"
-    permission="zope2.View"
-    class=".manager.BatchActionsViewletManager"
-    template="batchactions.pt"
-    />
+  <browser:viewletManager
+      name="collective.contact.facetednav.batchactions"
+      provides=".manager.IBatchActions"
+      class=".manager.BatchActionsViewletManager"
+      template="batchactions.pt"
+      permission="zope2.View"
+      />
 
-   <browser:viewletManager
-    name="collective.contact.facetednav.actions"
-    provides=".manager.IActions"
-    permission="zope2.View"
-    class=".manager.ActionsViewletManager"
-    template="actions.pt"
-    />
+  <browser:viewletManager
+      name="collective.contact.facetednav.actions"
+      provides=".manager.IActions"
+      class=".manager.ActionsViewletManager"
+      template="actions.pt"
+      permission="zope2.View"
+      />
 
 </configure>

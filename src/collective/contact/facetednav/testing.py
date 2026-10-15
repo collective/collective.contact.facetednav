@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Base module for unittesting."""
 
 from collective.contact.facetednav.interfaces import ICollectiveContactFacetednavLayer
@@ -23,7 +22,6 @@ import collective.contact.facetednav
 import os
 import transaction
 import unittest
-
 
 try:
     from plone.testing.zope import installProduct
@@ -59,7 +57,9 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         """Set up Plone."""
-        setLocal("request", portal.REQUEST)  # collective.fingerpointing (imio.fpaudit) needs a request
+        setLocal(
+            "request", portal.REQUEST
+        )  # collective.fingerpointing (imio.fpaudit) needs a request
         applyProfile(portal, "collective.contact.core:testing")
         applyProfile(portal, "collective.contact.core:test_data")
         applyProfile(portal, "collective.contact.facetednav:testing")
@@ -70,7 +70,9 @@ class CollectiveContactFacetednavLayer(PloneSandboxLayer):
         directory = portal.mydirectory
         directory.unrestrictedTraverse("@@faceted_subtyper").enable()
         with open(FACETED_XML, "rb") as import_file:
-            directory.unrestrictedTraverse("@@faceted_exportimport")._import_xml(import_file=import_file)
+            directory.unrestrictedTraverse("@@faceted_exportimport")._import_xml(
+                import_file=import_file
+            )
         setRoles(portal, TEST_USER_ID, ["Manager"])
         login(portal, TEST_USER_NAME)
         transaction.commit()
@@ -87,7 +89,9 @@ INTEGRATION = IntegrationTesting(bases=(FIXTURE,), name="INTEGRATION")
 
 FUNCTIONAL = FunctionalTesting(bases=(FIXTURE,), name="FUNCTIONAL")
 
-ACCEPTANCE = FunctionalTesting(bases=(FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, SERVER_FIXTURE), name="ACCEPTANCE")
+ACCEPTANCE = FunctionalTesting(
+    bases=(FIXTURE, REMOTE_LIBRARY_BUNDLE_FIXTURE, SERVER_FIXTURE), name="ACCEPTANCE"
+)
 
 
 class IntegrationTestCase(unittest.TestCase):
@@ -96,7 +100,7 @@ class IntegrationTestCase(unittest.TestCase):
     layer = INTEGRATION
 
     def setUp(self):
-        super(IntegrationTestCase, self).setUp()
+        super().setUp()
         self.portal = self.layer["portal"]
         self.request = self.layer["request"]
         self.directory = self.portal.mydirectory
@@ -107,7 +111,9 @@ class IntegrationTestCase(unittest.TestCase):
     def viewlet_manager(self, name, context, view_name):
         """updated viewlet manager, as rendered by the view_name view of context"""
         view = context.restrictedTraverse(view_name)
-        manager = getMultiAdapter((context, self.request, view), IViewletManager, name=name)
+        manager = getMultiAdapter(
+            (context, self.request, view), IViewletManager, name=name
+        )
         manager.update()
         return manager
 

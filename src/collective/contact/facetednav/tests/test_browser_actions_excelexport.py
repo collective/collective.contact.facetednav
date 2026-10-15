@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from collective.contact.facetednav.browser.actions.excelexport import ExcelExportAction
 from collective.contact.facetednav.testing import IntegrationTestCase
 
@@ -7,8 +6,12 @@ class TestExcelExportAction(IntegrationTestCase):
     """registered when collective.excelexport is installed (dependency of collective.documentgenerator)"""
 
     def setUp(self):
-        super(TestExcelExportAction, self).setUp()
-        manager = self.viewlet_manager("collective.contact.facetednav.batchactions", self.directory, "@@faceted_query")
+        super().setUp()
+        manager = self.viewlet_manager(
+            "collective.contact.facetednav.batchactions",
+            self.directory,
+            "@@faceted_query",
+        )
         self.viewlet = manager.viewlets[1]
 
     def test_onclick(self):

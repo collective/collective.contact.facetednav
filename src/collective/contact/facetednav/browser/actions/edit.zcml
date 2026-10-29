@@ -2,7 +2,13 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.contact.facetednav">
+    i18n_domain="collective.contact.facetednav"
+    >
+
+  <include
+      package="Products.CMFCore"
+      file="permissions.zcml"
+      />
 
   <browser:viewlet
       name="collective.contact.facetednav.action.edit"

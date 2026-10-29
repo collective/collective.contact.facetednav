@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<object meta_type="Plone Actions Tool"
+        name="portal_actions"
+>
+  <object meta_type="CMF Action Category"
+          name="object_buttons"
+  >
+    <object name="faceted.actions.disable"
+            remove="True"
+    />
+    <object name="faceted.actions.enable"
+            remove="True"
+    />
+  </object>
+</object>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<registry>
+
+  <!-- after eea.facetednavigation's faceted.view bundle, deferred as it is -->
+  <records interface="plone.base.interfaces.IBundleRegistry"
+           prefix="plone.bundles/collective-contact-facetednav"
+  >
+    <value key="enabled">True</value>
+    <value key="csscompilation">++resource++collective.contact.facetednav/style.css</value>
+    <value key="jscompilation">++resource++collective.contact.facetednav/javascript.js</value>
+    <value key="depends">faceted.view</value>
+    <value key="load_async">False</value>
+    <value key="load_defer">True</value>
+  </records>
+
+</registry>

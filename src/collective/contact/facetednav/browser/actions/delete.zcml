@@ -2,7 +2,8 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="collective.contact.facetednav">
+    i18n_domain="collective.contact.facetednav"
+    >
 
   <browser:viewlet
       name="collective.contact.facetednav.actions.delete"
@@ -19,11 +20,11 @@
       />
 
   <browser:page
-  	name="delete_selection"
-  	attribute="delete"
-  	for="collective.contact.core.content.directory.IDirectory"
-  	class="collective.contact.facetednav.browser.actions.delete.DeleteSelection"
-    permission="zope2.DeleteObjects"
-  	/>
+      name="delete_selection"
+      for="collective.contact.core.content.directory.IDirectory"
+      class="collective.contact.facetednav.browser.actions.delete.DeleteSelection"
+      attribute="delete"
+      permission="zope2.DeleteObjects"
+      />
 
 </configure>

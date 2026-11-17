@@ -1,41 +1,57 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:five="http://namespaces.zope.org/five"
-    xmlns:i18n="http://namespaces.zope.org/i18n"
-	xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="collective.contact.facetednav">
+    xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="collective.contact.facetednav"
+    >
 
-    <i18n:registerTranslations directory="locales" />
+  <i18n:registerTranslations directory="locales" />
 
-    <five:registerPackage package="." initialize=".initialize" />
+  <five:registerPackage
+      package="."
+      initialize=".initialize"
+      />
 
-    <include package="plone.api" />
-    <include package="plone.behavior" file="meta.zcml" />
-    <include package="collective.contact.core" />
-    <include package="eea.facetednavigation" />
+  <include package="plone.api" />
+  <include
+      package="plone.behavior"
+      file="meta.zcml"
+      />
+  <include package="collective.contact.core" />
+  <include package="eea.facetednavigation" />
 
-    <include package=".browser" />
-    <include package=".upgrades" />
+  <include package=".browser" />
+  <include package=".upgrades" />
 
-    <genericsetup:registerProfile
-        name="default"
-        title="collective.contact.facetednav"
-        directory="profiles/default"
-        description="Installs the collective.contact.facetednav add-on."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
+  <genericsetup:registerProfile
+      name="default"
+      title="collective.contact.facetednav"
+      description="Installs the collective.contact.facetednav add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      />
 
-    <genericsetup:importStep
-        name="collective.contactfacetednav-postInstall"
-        title="collective.contact.facetednav post_install import step"
-        description="Post install import step from collective.contact.facetednav"
-        handler=".setuphandlers.post_install">
+  <genericsetup:registerProfile
+      name="uninstall"
+      title="collective.contact.facetednav (uninstall)"
+      description="Uninstalls the collective.contact.facetednav add-on."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
+      />
+
+  <genericsetup:importStep
+      name="collective.contactfacetednav-postInstall"
+      title="collective.contact.facetednav post_install import step"
+      description="Post install import step from collective.contact.facetednav"
+      handler=".setuphandlers.post_install"
+      >
     </genericsetup:importStep>
 
-    <utility
-      component=".vocabularies.ContactPortalTypesVocabularyFactory"
+  <utility
       name="collective.contact.facetednav.vocabularies.ContactPortalTypes"
+      component=".vocabularies.ContactPortalTypesVocabularyFactory"
       />
 
 </configure>
